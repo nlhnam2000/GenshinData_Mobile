@@ -32,6 +32,9 @@ export const DetailCharacter = props => {
 
   useEffect(() => {
     setLoading(false);
+    return () => {
+      setTab(tabContent[0]);
+    };
   }, []);
 
   if (loading) {
@@ -193,7 +196,9 @@ const styles = StyleSheet.create({
     width: '33%',
     paddingHorizontal: 10,
     paddingVertical: 10,
-    backgroundColor: colors.contentBackground,
+    // backgroundColor: colors.contentBackground,
+    // borderColor: colors.background,
+    // borderBottomWidth: 2,
   },
   tabText: {
     textAlign: 'center',

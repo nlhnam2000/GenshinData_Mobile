@@ -52,10 +52,10 @@ export const TalentTab = props => {
       let str = label.split('|')[1];
       let params = [];
 
-      if (label.includes('Low/High Plunge DMG')) {
+      if (label.includes('/' || 'Low/High Plunge DMG')) {
         params.push(str.substring(str.indexOf('{') + 1, str.indexOf('}')));
         params.push(str.substring(str.indexOf('/') + 2, str.lastIndexOf('}')));
-      } else if (label.includes('Charged Attack DMG')) {
+      } else if (label.includes('+' || 'Charged Attack DMG')) {
         params.push(str.substring(str.indexOf('{') + 1, str.indexOf('}')));
         params.push(str.substring(str.indexOf('+') + 2, str.lastIndexOf('}')));
       } else {
@@ -76,7 +76,7 @@ export const TalentTab = props => {
               parameters[paramsName1][level - 1],
               formattedSymbol1,
             ) +
-            '/' +
+            ' / ' +
             attributeFormated(
               parameters[paramsName2][level - 1],
               formattedSymbol2,
@@ -147,8 +147,24 @@ export const TalentTab = props => {
   };
 
   useEffect(() => {
-    // console.log(talents(props.character).combat1.attributes);
+    console.log(talents(props.character).combat1.attributes);
     setLoading(false);
+
+    return () => {
+      // setLevel(prev => ({...prev, skill1: 1, skill2: 1, skill3: 1}));
+      // setToggleSkills(prev => ({
+      //   ...prev,
+      //   skill1: false,
+      //   skill2: false,
+      //   skill3: false,
+      // }));
+      // setTogglePassive(prev => ({
+      //   ...prev,
+      //   passive1: false,
+      //   passive2: false,
+      //   passive3: false,
+      // }));
+    };
   });
   if (loading) {
     return (
@@ -177,7 +193,7 @@ export const TalentTab = props => {
                 <Text style={[styles.heading, {textAlign: 'center'}]}>
                   {talents(props.character).combat1.name}
                 </Text>
-                {toggleSkills.skill1 ? (
+                {/* {toggleSkills.skill1 ? (
                   <ImageBackground
                     source={URL_SKILLS[0]}
                     style={{
@@ -190,7 +206,7 @@ export const TalentTab = props => {
                       opacity: 0.5,
                     }}
                   />
-                ) : null}
+                ) : null} */}
               </View>
 
               {toggleSkills.skill1 ? null : (
@@ -206,7 +222,7 @@ export const TalentTab = props => {
                 </Text>
               )}
               {toggleSkills.skill1 ? (
-                <View style={{width: '100%', marginTop: 100}}>
+                <View style={{width: '100%'}}>
                   <Text style={[styles.text, {marginTop: 10}]}>
                     {talents(props.character).combat1.info}
                   </Text>
@@ -241,16 +257,38 @@ export const TalentTab = props => {
                     ).map((item, index) => {
                       return (
                         <View style={styles.line} key={index}>
-                          <Text style={[styles.text, {fontSize: 15}]}>
-                            {item.label}
-                          </Text>
-                          <Text
-                            style={[
-                              styles.text,
-                              {fontSize: 15, color: 'white'},
-                            ]}>
-                            {item.value}
-                          </Text>
+                          <View
+                            style={{
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              flexWrap: 'wrap',
+                            }}>
+                            <Text
+                              style={[
+                                styles.text,
+                                {
+                                  fontSize:
+                                    item.label.split(' ').length > 2 ? 13 : 15,
+                                },
+                              ]}>
+                              {item.label}
+                            </Text>
+                          </View>
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              justifyContent: 'flex-start',
+                              alignItems: 'center',
+                              flexWrap: 'wrap',
+                            }}>
+                            <Text
+                              style={[
+                                styles.text,
+                                {fontSize: 15, color: 'white'},
+                              ]}>
+                              {item.value}
+                            </Text>
+                          </View>
                         </View>
                       );
                     })}
@@ -283,7 +321,7 @@ export const TalentTab = props => {
                 <Text style={[styles.heading, {textAlign: 'center'}]}>
                   {talents(props.character).combat2.name}
                 </Text>
-                {toggleSkills.skill2 ? (
+                {/* {toggleSkills.skill2 ? (
                   <ImageBackground
                     source={URL_SKILLS[1]}
                     style={{
@@ -296,7 +334,7 @@ export const TalentTab = props => {
                       opacity: 0.5,
                     }}
                   />
-                ) : null}
+                ) : null} */}
               </View>
 
               {toggleSkills.skill2 ? null : (
@@ -312,7 +350,7 @@ export const TalentTab = props => {
                 </Text>
               )}
               {toggleSkills.skill2 ? (
-                <View style={{width: '100%', marginTop: 100}}>
+                <View style={{width: '100%'}}>
                   <Text style={[styles.text, {marginTop: 10}]}>
                     {talents(props.character).combat2.info}
                   </Text>
@@ -347,9 +385,17 @@ export const TalentTab = props => {
                     ).map((item, index) => {
                       return (
                         <View style={styles.line} key={index}>
-                          <Text style={[styles.text, {fontSize: 15}]}>
-                            {item.label}
-                          </Text>
+                          <View
+                            style={{
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              flexWrap: 'wrap',
+                              width: '80%',
+                            }}>
+                            <Text style={[styles.text, {fontSize: 15}]}>
+                              {item.label}
+                            </Text>
+                          </View>
                           <Text
                             style={[
                               styles.text,
@@ -389,7 +435,7 @@ export const TalentTab = props => {
                 <Text style={[styles.heading, {textAlign: 'center'}]}>
                   {talents(props.character).combat3.name}
                 </Text>
-                {toggleSkills.skill3 ? (
+                {/* {toggleSkills.skill3 ? (
                   <ImageBackground
                     source={URL_SKILLS[2]}
                     style={{
@@ -402,7 +448,7 @@ export const TalentTab = props => {
                       opacity: 0.5,
                     }}
                   />
-                ) : null}
+                ) : null} */}
               </View>
 
               {toggleSkills.skill3 ? null : (
@@ -418,7 +464,7 @@ export const TalentTab = props => {
                 </Text>
               )}
               {toggleSkills.skill3 ? (
-                <View style={{width: '100%', marginTop: 100}}>
+                <View style={{width: '100%'}}>
                   <Text style={[styles.text, {marginTop: 10}]}>
                     {talents(props.character).combat3.info}
                   </Text>
@@ -453,9 +499,17 @@ export const TalentTab = props => {
                     ).map((item, index) => {
                       return (
                         <View style={styles.line} key={index}>
-                          <Text style={[styles.text, {fontSize: 15}]}>
-                            {item.label}
-                          </Text>
+                          <View
+                            style={{
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              flexWrap: 'wrap',
+                              width: '80%',
+                            }}>
+                            <Text style={[styles.text, {fontSize: 15}]}>
+                              {item.label}
+                            </Text>
+                          </View>
                           <Text
                             style={[
                               styles.text,

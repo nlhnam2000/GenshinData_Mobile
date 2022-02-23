@@ -72,6 +72,10 @@ export const StatTab = props => {
     setLoading(false);
     // GenshinDB.setOptions({resultLanguage: 'Vietnamese'});
     // console.log(characters(props.character, {verboseCategories: true}));
+    return () => {
+      setPhase(1);
+      setLevel(20);
+    };
   }, []);
 
   if (loading) {
