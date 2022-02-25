@@ -25,7 +25,6 @@ const {width} = Dimensions.get('window');
 export const Characters = props => {
   const drawerNavigation = useNavigation();
   const [loading, setLoading] = useState(true);
-  const [characters, setCharacters] = useState([]);
 
   const sortLabel = ['Element', 'Rarity', 'Weapon', 'Regions'];
   const [currentSort, setCurrentSort] = useState(sortLabel[0]);
@@ -80,11 +79,23 @@ export const Characters = props => {
     <View style={styles.container}>
       <Navbar />
       <ScrollView>
+        <Text
+          style={[
+            styles.text,
+            {
+              paddingHorizontal: 10,
+              marginTop: 20,
+              fontSize: 20,
+              color: 'white',
+            },
+          ]}>
+          Sort by
+        </Text>
         <View
           style={{
             width,
             flexDirection: 'row',
-            justifyContent: 'space-around',
+            justifyContent: 'center',
             alignItems: 'center',
             marginTop: 20,
           }}>
@@ -101,11 +112,11 @@ export const Characters = props => {
                 },
               ]}
               onPress={() => sortingMethod(label)}>
-              <Text style={styles.text}>{label}</Text>
+              <Text style={[styles.text, {fontSize: 20}]}>{label}</Text>
             </TouchableOpacity>
           ))}
         </View>
-        {sorting.map((region, i) => (
+        {sorting.map((title, i) => (
           <View
             key={i}
             style={{

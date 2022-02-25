@@ -14,7 +14,7 @@ import {
 import {colors} from '../../../assets/colors/colors';
 import Feather from 'react-native-vector-icons/Feather';
 import {constellations} from 'genshin-db';
-import {color} from 'react-native-reanimated';
+import Markdown from 'react-native-markdown-package';
 
 const {width, height} = Dimensions.get('window');
 
@@ -53,10 +53,14 @@ export const ConstellationTab = props => {
                       Constellation lv.{index + 1}
                     </Text>
                   </View>
-                  <View style={{width: '100%', marginTop: 20}}>
-                    <Text style={styles.text}>
+                  <View
+                    style={{
+                      width: '100%',
+                      marginTop: 10,
+                    }}>
+                    <Markdown styles={markdownStyle.singleLineMd}>
                       {constellations(props.character)[c[index]].effect}
-                    </Text>
+                    </Markdown>
                   </View>
                 </View>
               );
@@ -102,3 +106,13 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
 });
+
+const markdownStyle = {
+  singleLineMd: {
+    text: {
+      color: colors.text,
+      fontWeight: '600',
+      fontSize: 17,
+    },
+  },
+};
