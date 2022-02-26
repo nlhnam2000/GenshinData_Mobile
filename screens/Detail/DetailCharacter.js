@@ -31,6 +31,7 @@ export const DetailCharacter = props => {
   const [tab, setTab] = useState(tabContent[0]);
 
   useEffect(() => {
+    // console.log(GenshinDB.talents(character).costs.lvl10[1].name);
     setLoading(false);
     return () => {
       setTab(tabContent[0]);

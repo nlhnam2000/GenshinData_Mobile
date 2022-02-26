@@ -30,6 +30,7 @@ import {WeaponScreen} from './screens/Weapon';
 import {SideMenu} from './components/Menu/SideMenu';
 import {DetailCharacter} from './screens/Detail/DetailCharacter';
 import {DetailWeapon} from './screens/Detail/DetailWeapon';
+import {HomeScreen} from './screens/HomeScreen';
 
 Feather.loadFont();
 const Stack = createNativeStackNavigator();
@@ -60,9 +61,14 @@ export const App = () => {
     return (
       <NavigationContainer>
         <Drawer.Navigator
-          initialRouteName="Characters"
+          initialRouteName="HomeScreen"
           backBehavior="history"
           drawerContent={props => <SideMenu {...props} />}>
+          <Drawer.Screen
+            component={HomeScreen}
+            name="HomeScreen"
+            options={{headerShown: false}}
+          />
           <Drawer.Screen
             component={Characters}
             name="Characters"
