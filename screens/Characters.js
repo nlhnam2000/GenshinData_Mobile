@@ -29,20 +29,14 @@ export const Characters = props => {
   const sortLabel = ['Element', 'Rarity', 'Weapon', 'Regions'];
   const [currentSort, setCurrentSort] = useState(sortLabel[0]);
   const [sorting, setSorting] = useState(
-    GenshinDB.elements('names', {matchCategories: true}).filter(
-      item => item !== 'Dendro',
-    ),
+    GenshinDB.elements('names', {matchCategories: true}).filter(item => item !== 'Dendro'),
   );
 
   const sortingMethod = type => {
     switch (type) {
       case 'Element':
         setCurrentSort(type);
-        setSorting(
-          GenshinDB.elements('names', {matchCategories: true}).filter(
-            item => item !== 'Dendro',
-          ),
-        );
+        setSorting(GenshinDB.elements('names', {matchCategories: true}).filter(item => item !== 'Dendro'));
         break;
       case 'Rarity':
         setCurrentSort(type);
@@ -77,7 +71,7 @@ export const Characters = props => {
 
   return (
     <View style={styles.container}>
-      <Navbar />
+      <Navbar label="Character list" />
       <ScrollView>
         <Text
           style={[
@@ -105,10 +99,7 @@ export const Characters = props => {
               style={[
                 styles.labelButton,
                 {
-                  backgroundColor:
-                    label === currentSort
-                      ? colors.background
-                      : colors.contentBackground,
+                  backgroundColor: label === currentSort ? colors.background : colors.contentBackground,
                 },
               ]}
               onPress={() => sortingMethod(label)}>
@@ -132,9 +123,7 @@ export const Characters = props => {
                 paddingHorizontal: 20,
                 paddingTop: 10,
               }}>
-              {sorting[i] === '5' || sorting[i] === '4'
-                ? sorting[i] + ' Star'
-                : sorting[i]}
+              {sorting[i] === '5' || sorting[i] === '4' ? sorting[i] + ' Star' : sorting[i]}
             </Text>
             <View style={styles.characterWrapper}>
               {GenshinDB.characters(sorting[i], {
@@ -149,11 +138,7 @@ export const Characters = props => {
                       })
                     }>
                     <LinearGradient
-                      colors={
-                        GenshinDB.characters(character).rarity === '5'
-                          ? colors.goldCard
-                          : colors.purpleCard
-                      }
+                      colors={GenshinDB.characters(character).rarity === '5' ? colors.goldCard : colors.purpleCard}
                       style={[styles.characterItem]}>
                       <Image
                         source={{

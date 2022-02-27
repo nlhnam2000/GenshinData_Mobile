@@ -47,7 +47,7 @@ export const WeaponScreen = props => {
 
   return (
     <View style={styles.container}>
-      <Navbar />
+      <Navbar label={'Weapon list'} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{width}}>
           <View
@@ -64,10 +64,7 @@ export const WeaponScreen = props => {
                 style={[
                   styles.labelButton,
                   {
-                    backgroundColor:
-                      label === currentType
-                        ? colors.background
-                        : colors.contentBackground,
+                    backgroundColor: label === currentType ? colors.background : colors.contentBackground,
                   },
                 ]}
                 onPress={() => setCurrentType(label)}>
@@ -97,9 +94,7 @@ export const WeaponScreen = props => {
                         })
                       }>
                       {GenshinDB.weapons(weapon).rarity === '5' ? (
-                        <LinearGradient
-                          colors={colors.goldCard}
-                          style={[styles.characterItem]}>
+                        <LinearGradient colors={colors.goldCard} style={[styles.characterItem]}>
                           <Image
                             source={{
                               uri: GenshinDB.weapons(weapon).images.icon,
@@ -109,9 +104,7 @@ export const WeaponScreen = props => {
                         </LinearGradient>
                       ) : null}
                       {GenshinDB.weapons(weapon).rarity === '4' ? (
-                        <LinearGradient
-                          colors={colors.purpleCard}
-                          style={[styles.characterItem]}>
+                        <LinearGradient colors={colors.purpleCard} style={[styles.characterItem]}>
                           <Image
                             source={{
                               uri: GenshinDB.weapons(weapon).images.icon,
@@ -121,9 +114,7 @@ export const WeaponScreen = props => {
                         </LinearGradient>
                       ) : null}
                       {GenshinDB.weapons(weapon).rarity === '3' ? (
-                        <LinearGradient
-                          colors={colors.blueCard}
-                          style={[styles.characterItem]}>
+                        <LinearGradient colors={colors.blueCard} style={[styles.characterItem]}>
                           <Image
                             source={{
                               uri: GenshinDB.weapons(weapon).images.icon,
@@ -133,9 +124,7 @@ export const WeaponScreen = props => {
                         </LinearGradient>
                       ) : null}
                       {GenshinDB.weapons(weapon).rarity === '2' ? (
-                        <LinearGradient
-                          colors={colors.greenCard}
-                          style={[styles.characterItem]}>
+                        <LinearGradient colors={colors.greenCard} style={[styles.characterItem]}>
                           <Image
                             source={{
                               uri: GenshinDB.weapons(weapon).images.icon,
@@ -145,9 +134,7 @@ export const WeaponScreen = props => {
                         </LinearGradient>
                       ) : null}
                       {GenshinDB.weapons(weapon).rarity === '1' ? (
-                        <LinearGradient
-                          colors={colors.grayCard}
-                          style={[styles.characterItem]}>
+                        <LinearGradient colors={colors.grayCard} style={[styles.characterItem]}>
                           <Image
                             source={{
                               uri: GenshinDB.weapons(weapon).images.icon,
@@ -179,11 +166,8 @@ export const WeaponScreen = props => {
                           color: colors.text,
                           fontWeight: 'bold',
                         }}>
-                        Substat: {GenshinDB.weapons(weapon).substat}{' '}
-                        {GenshinDB.weapons(weapon).subvalue}
-                        {GenshinDB.weapons(weapon).substat.includes('Mastery')
-                          ? null
-                          : '%'}
+                        Substat: {GenshinDB.weapons(weapon).substat} {GenshinDB.weapons(weapon).subvalue}
+                        {GenshinDB.weapons(weapon).substat.includes('Mastery') ? null : '%'}
                       </Text>
                     </View>
                   </View>
