@@ -42,7 +42,6 @@ export const getTodayCharacter = (day, type) => {
     const cleaned_domains = Array.from(set.values());
 
     const talentMaterials = cleaned_domains.map(domain => {
-      // console.log(domains('Realm of Slumber'));
       let name = domains(domain).rewardpreview[domains(domain).rewardpreview.length - 1].name;
       if (domain === 'Domain of Mastery: Altar of Flames' || domain === 'Domain of Mastery: Circle of Embers') {
         result[1] = {
@@ -105,12 +104,7 @@ export const getTodayCharacter = (day, type) => {
         if (domains(todayMaterial[index].dropdomain).domainentrance === 'Cecilia Garden') {
           result[0].domainEntrance = domains(todayMaterial[index].dropdomain).domainentrance;
           result[0].characters.push(wp);
-        }
-        // else if (domains(todayMaterial[index].dropdomain).region === 'Liyue') {
-        //   result[1].domainEntrance = domains(todayMaterial[index].dropdomain).domainentrance;
-        //   result[1].characters.push(wp);
-        // }
-        else if (domains(todayMaterial[index].dropdomain).domainentrance === 'Court of Flowing Sand') {
+        } else if (domains(todayMaterial[index].dropdomain).domainentrance === 'Court of Flowing Sand') {
           result[2].domainEntrance = domains(todayMaterial[index].dropdomain).domainentrance;
           result[2].characters.push(wp);
         } else if (domains(todayMaterial[index].dropdomain).domainentrance === 'Hidden Palace of Lianshan Formula') {

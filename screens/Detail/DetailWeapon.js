@@ -16,11 +16,14 @@ import Feather from 'react-native-vector-icons/Feather';
 import GenshinDB from 'genshin-db';
 import LinearGradient from 'react-native-linear-gradient';
 import Markdown from 'react-native-markdown-package';
+import {MaterialDialog} from '../../components/Material/MaterialDialog';
 
 const {width} = Dimensions.get('window');
 
 export const DetailWeapon = props => {
   const [loading, setLoading] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+  const [materialClicked, setMaterialClicked] = useState('');
   const [refinementLevel, setRefinementLevel] = useState(1);
 
   const levels = [
@@ -128,12 +131,7 @@ export const DetailWeapon = props => {
   return (
     <View style={styles.container}>
       <View style={styles.headerWrapper}>
-        <Feather
-          name="arrow-left"
-          size={20}
-          color={'white'}
-          onPress={() => props.navigation.goBack('WeaponScreen')}
-        />
+        <Feather name="arrow-left" size={20} color={'white'} onPress={() => props.navigation.goBack('WeaponScreen')} />
       </View>
       <ScrollView>
         <View
@@ -146,9 +144,7 @@ export const DetailWeapon = props => {
           <View style={styles.contentWrapper}>
             <View style={styles.contentHeader}>
               {GenshinDB.weapons(weapon).rarity === '5' ? (
-                <LinearGradient
-                  colors={colors.goldCard}
-                  style={[styles.characterItem]}>
+                <LinearGradient colors={colors.goldCard} style={[styles.characterItem]}>
                   <Image
                     source={{
                       uri: GenshinDB.weapons(weapon).images.icon,
@@ -158,9 +154,7 @@ export const DetailWeapon = props => {
                 </LinearGradient>
               ) : null}
               {GenshinDB.weapons(weapon).rarity === '4' ? (
-                <LinearGradient
-                  colors={colors.purpleCard}
-                  style={[styles.characterItem]}>
+                <LinearGradient colors={colors.purpleCard} style={[styles.characterItem]}>
                   <Image
                     source={{
                       uri: GenshinDB.weapons(weapon).images.icon,
@@ -170,9 +164,7 @@ export const DetailWeapon = props => {
                 </LinearGradient>
               ) : null}
               {GenshinDB.weapons(weapon).rarity === '3' ? (
-                <LinearGradient
-                  colors={colors.blueCard}
-                  style={[styles.characterItem]}>
+                <LinearGradient colors={colors.blueCard} style={[styles.characterItem]}>
                   <Image
                     source={{
                       uri: GenshinDB.weapons(weapon).images.icon,
@@ -182,9 +174,7 @@ export const DetailWeapon = props => {
                 </LinearGradient>
               ) : null}
               {GenshinDB.weapons(weapon).rarity === '2' ? (
-                <LinearGradient
-                  colors={colors.greenCard}
-                  style={[styles.characterItem]}>
+                <LinearGradient colors={colors.greenCard} style={[styles.characterItem]}>
                   <Image
                     source={{
                       uri: GenshinDB.weapons(weapon).images.icon,
@@ -194,9 +184,7 @@ export const DetailWeapon = props => {
                 </LinearGradient>
               ) : null}
               {GenshinDB.weapons(weapon).rarity === '1' ? (
-                <LinearGradient
-                  colors={colors.grayCard}
-                  style={[styles.characterItem]}>
+                <LinearGradient colors={colors.grayCard} style={[styles.characterItem]}>
                   <Image
                     source={{
                       uri: GenshinDB.weapons(weapon).images.icon,
@@ -220,8 +208,7 @@ export const DetailWeapon = props => {
                       fontSize: 19,
                       marginRight: 5,
                     }}>
-                    {GenshinDB.weapons(weapon).name} (
-                    {GenshinDB.weapons(weapon).rarity}{' '}
+                    {GenshinDB.weapons(weapon).name} ({GenshinDB.weapons(weapon).rarity}{' '}
                     <Feather name="star" size={20} color={colors.textWhite} />)
                   </Text>
                 </View>
@@ -255,9 +242,7 @@ export const DetailWeapon = props => {
                 ]}>
                 Description
               </Text>
-              <Text style={styles.text}>
-                {GenshinDB.weapons(weapon).description}
-              </Text>
+              <Text style={styles.text}>{GenshinDB.weapons(weapon).description}</Text>
             </View>
             {/* Stats */}
             <View style={styles.statWrapper}>
@@ -287,12 +272,7 @@ export const DetailWeapon = props => {
                     style={{marginRight: 10}}
                     onPress={() => decreaseLevel()}
                   />
-                  <Feather
-                    name="plus-circle"
-                    size={22}
-                    color={colors.text}
-                    onPress={() => increaseLevel()}
-                  />
+                  <Feather name="plus-circle" size={22} color={colors.text} onPress={() => increaseLevel()} />
                 </View>
               </View>
               <View style={styles.statContentWrapper}>
@@ -300,41 +280,25 @@ export const DetailWeapon = props => {
                   <Text style={[styles.text, {marginBottom: 10}]}>
                     Base ATK:{' '}
                     {GenshinDB.weapons(weapon)
-                      .stats(
-                        weaponLevel.split(' ')[0],
-                        weaponLevel.split(' ')[1],
-                      )
+                      .stats(weaponLevel.split(' ')[0], weaponLevel.split(' ')[1])
                       .attack.toFixed(0)}
                   </Text>
                   <Text style={[styles.text, {marginBottom: 10}]}>
-                    Level:{' '}
-                    {
-                      GenshinDB.weapons(weapon).stats(
-                        weaponLevel.split(' ')[0],
-                        weaponLevel.split(' ')[1],
-                      ).level
-                    }
+                    Level: {GenshinDB.weapons(weapon).stats(weaponLevel.split(' ')[0], weaponLevel.split(' ')[1]).level}
                   </Text>
                 </View>
                 <View style={styles.statContent}>
                   <Text style={[styles.text, {marginBottom: 10}]}>
                     {GenshinDB.weapons(weapon).substat}:{' '}
                     {(
-                      GenshinDB.weapons(weapon).stats(
-                        weaponLevel.split(' ')[0],
-                        weaponLevel.split(' ')[1],
-                      ).specialized * 100
+                      GenshinDB.weapons(weapon).stats(weaponLevel.split(' ')[0], weaponLevel.split(' ')[1])
+                        .specialized * 100
                     ).toFixed(1)}
                     %
                   </Text>
                   <Text style={[styles.text, {marginBottom: 10}]}>
                     Ascension:{' '}
-                    {
-                      GenshinDB.weapons(weapon).stats(
-                        weaponLevel.split(' ')[0],
-                        weaponLevel.split(' ')[1],
-                      ).ascension
-                    }
+                    {GenshinDB.weapons(weapon).stats(weaponLevel.split(' ')[0], weaponLevel.split(' ')[1]).ascension}
                   </Text>
                 </View>
               </View>
@@ -367,15 +331,8 @@ export const DetailWeapon = props => {
                     style={{marginRight: 10}}
                     onPress={() => decreaseRefinementLevel()}
                   />
-                  <Text style={[styles.text, {marginRight: 10}]}>
-                    {refinementLevel}
-                  </Text>
-                  <Feather
-                    name="plus-circle"
-                    size={22}
-                    color={colors.text}
-                    onPress={() => increaseRefinementLevel()}
-                  />
+                  <Text style={[styles.text, {marginRight: 10}]}>{refinementLevel}</Text>
+                  <Feather name="plus-circle" size={22} color={colors.text} onPress={() => increaseRefinementLevel()} />
                 </View>
               </View>
               <Markdown styles={markdownStyles.text}>
@@ -406,10 +363,7 @@ export const DetailWeapon = props => {
                       alignItems: 'center',
                       padding: 10,
                       marginBottom: 10,
-                      backgroundColor:
-                        index % 2 === 0
-                          ? colors.contentBackground
-                          : colors.contentBackground2,
+                      backgroundColor: index % 2 === 0 ? colors.contentBackground : colors.contentBackground2,
                     }}>
                     <Text style={styles.text}>{ascend.label}</Text>
                     <View
@@ -418,27 +372,30 @@ export const DetailWeapon = props => {
                         justifyContent: 'space-between',
                         alignItems: 'center',
                       }}>
-                      {GenshinDB.weapons(weapon).costs[ascend.key].map(
-                        (item, index) => {
-                          return (
-                            <View
-                              key={index}
-                              style={{
-                                justifyContent: 'center',
-                                alignItems: 'center',
+                      {GenshinDB.weapons(weapon).costs[ascend.key].map((item, index) => {
+                        return (
+                          <View
+                            key={index}
+                            style={{
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}>
+                            <TouchableOpacity
+                              onPress={() => {
+                                setMaterialClicked(item.name);
+                                setOpenModal(true);
                               }}>
                               <Image
                                 source={{
-                                  uri: GenshinDB.materials(item.name).images
-                                    .fandom,
+                                  uri: GenshinDB.materials(item.name).images.fandom,
                                 }}
                                 style={{width: 50, height: 50}}
                               />
-                              <Text style={styles.text}>{item.count}</Text>
-                            </View>
-                          );
-                        },
-                      )}
+                            </TouchableOpacity>
+                            <Text style={styles.text}>{item.count}</Text>
+                          </View>
+                        );
+                      })}
                     </View>
                   </View>
                 ))}
@@ -447,6 +404,9 @@ export const DetailWeapon = props => {
           </View>
         </View>
       </ScrollView>
+      {openModal ? (
+        <MaterialDialog visible={openModal} message={materialClicked} onCancel={() => setOpenModal(false)} />
+      ) : null}
     </View>
   );
 };

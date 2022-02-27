@@ -16,12 +16,15 @@ import {colors} from '../../../assets/colors/colors';
 import {materials, talents} from 'genshin-db';
 import Feather from 'react-native-vector-icons/Feather';
 import {IMAGE_URL} from '../../../global';
-// import * as GIF_URL from '../../index';
+import {MaterialDialog} from '../../Material/MaterialDialog';
+import {color} from 'react-native-reanimated';
 
 const {width, height} = Dimensions.get('window');
 
 export const TalentTab = props => {
   const [loading, setLoading] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+  const [materialClicked, setMaterialClicked] = useState('');
   const [toggleSkills, setToggleSkills] = useState({
     skill1: false,
     skill2: false,
@@ -42,6 +45,45 @@ export const TalentTab = props => {
     require('../../../assets/gifs/Diluc/skill1.gif'),
     require('../../../assets/gifs/Diluc/skill2.gif'),
     require('../../../assets/gifs/Diluc/skill3.gif'),
+  ];
+
+  const talentLevel = [
+    {
+      label: 'Level 2',
+      key: 'lvl2',
+    },
+    {
+      label: 'Level 3',
+      key: 'lvl3',
+    },
+    {
+      label: 'Level 4',
+      key: 'lvl4',
+    },
+    {
+      label: 'Level 5',
+      key: 'lvl5',
+    },
+    {
+      label: 'Level 6',
+      key: 'lvl6',
+    },
+    {
+      label: 'Level 7',
+      key: 'lvl7',
+    },
+    {
+      label: 'Level 8',
+      key: 'lvl8',
+    },
+    {
+      label: 'Level 9',
+      key: 'lvl9',
+    },
+    {
+      label: 'Level 10',
+      key: 'lvl10',
+    },
   ];
 
   const inspectTalentsAttributes = (labels, parameters, level) => {
@@ -72,24 +114,15 @@ export const TalentTab = props => {
           let formattedSymbol2 = el2.split(':')[1];
 
           return (
-            attributeFormated(
-              parameters[paramsName1][level - 1],
-              formattedSymbol1,
-            ) +
+            attributeFormated(parameters[paramsName1][level - 1], formattedSymbol1) +
             ' / ' +
-            attributeFormated(
-              parameters[paramsName2][level - 1],
-              formattedSymbol2,
-            )
+            attributeFormated(parameters[paramsName2][level - 1], formattedSymbol2)
           );
         });
       } else {
         let paramsName = params[0].split(':')[0];
         let paramsFormatedSymbol = params[0].split(':')[1];
-        paramsValue = attributeFormated(
-          parameters[paramsName][level - 1],
-          paramsFormatedSymbol,
-        );
+        paramsValue = attributeFormated(parameters[paramsName][level - 1], paramsFormatedSymbol);
       }
 
       result.push({
@@ -183,30 +216,11 @@ export const TalentTab = props => {
               <View style={styles.talentName}>
                 <Image
                   source={{
-                    uri:
-                      IMAGE_URL +
-                      talents(props.character).images.combat1 +
-                      '.png',
+                    uri: IMAGE_URL + talents(props.character).images.combat1 + '.png',
                   }}
                   style={{width: 60, height: 60, marginBottom: 10}}
                 />
-                <Text style={[styles.heading, {textAlign: 'center'}]}>
-                  {talents(props.character).combat1.name}
-                </Text>
-                {/* {toggleSkills.skill1 ? (
-                  <ImageBackground
-                    source={URL_SKILLS[0]}
-                    style={{
-                      width: width - 20,
-                      height: 170,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      position: 'absolute',
-                      marginTop: -10,
-                      opacity: 0.5,
-                    }}
-                  />
-                ) : null} */}
+                <Text style={[styles.heading, {textAlign: 'center'}]}>{talents(props.character).combat1.name}</Text>
               </View>
 
               {toggleSkills.skill1 ? null : (
@@ -215,17 +229,13 @@ export const TalentTab = props => {
                     name="chevron-down"
                     size={20}
                     color={'white'}
-                    onPress={() =>
-                      setToggleSkills(prev => ({...prev, skill1: true}))
-                    }
+                    onPress={() => setToggleSkills(prev => ({...prev, skill1: true}))}
                   />
                 </Text>
               )}
               {toggleSkills.skill1 ? (
                 <View style={{width: '100%'}}>
-                  <Text style={[styles.text, {marginTop: 10}]}>
-                    {talents(props.character).combat1.info}
-                  </Text>
+                  <Text style={[styles.text, {marginTop: 10}]}>{talents(props.character).combat1.info}</Text>
                   <View style={styles.attributeInfoWrapper}>
                     <View
                       style={{
@@ -267,8 +277,7 @@ export const TalentTab = props => {
                               style={[
                                 styles.text,
                                 {
-                                  fontSize:
-                                    item.label.split(' ').length > 2 ? 13 : 15,
+                                  fontSize: item.label.split(' ').length > 2 ? 13 : 15,
                                 },
                               ]}>
                               {item.label}
@@ -281,13 +290,7 @@ export const TalentTab = props => {
                               alignItems: 'center',
                               flexWrap: 'wrap',
                             }}>
-                            <Text
-                              style={[
-                                styles.text,
-                                {fontSize: 15, color: 'white'},
-                              ]}>
-                              {item.value}
-                            </Text>
+                            <Text style={[styles.text, {fontSize: 15, color: 'white'}]}>{item.value}</Text>
                           </View>
                         </View>
                       );
@@ -298,9 +301,7 @@ export const TalentTab = props => {
                       name="chevron-up"
                       size={20}
                       color={'white'}
-                      onPress={() =>
-                        setToggleSkills(prev => ({...prev, skill1: false}))
-                      }
+                      onPress={() => setToggleSkills(prev => ({...prev, skill1: false}))}
                     />
                   </Text>
                 </View>
@@ -311,16 +312,11 @@ export const TalentTab = props => {
               <View style={styles.talentName}>
                 <Image
                   source={{
-                    uri:
-                      IMAGE_URL +
-                      talents(props.character).images.combat2 +
-                      '.png',
+                    uri: IMAGE_URL + talents(props.character).images.combat2 + '.png',
                   }}
                   style={{width: 60, height: 60, marginBottom: 10}}
                 />
-                <Text style={[styles.heading, {textAlign: 'center'}]}>
-                  {talents(props.character).combat2.name}
-                </Text>
+                <Text style={[styles.heading, {textAlign: 'center'}]}>{talents(props.character).combat2.name}</Text>
                 {/* {toggleSkills.skill2 ? (
                   <ImageBackground
                     source={URL_SKILLS[1]}
@@ -343,17 +339,13 @@ export const TalentTab = props => {
                     name="chevron-down"
                     size={20}
                     color={'white'}
-                    onPress={() =>
-                      setToggleSkills(prev => ({...prev, skill2: true}))
-                    }
+                    onPress={() => setToggleSkills(prev => ({...prev, skill2: true}))}
                   />
                 </Text>
               )}
               {toggleSkills.skill2 ? (
                 <View style={{width: '100%'}}>
-                  <Text style={[styles.text, {marginTop: 10}]}>
-                    {talents(props.character).combat2.info}
-                  </Text>
+                  <Text style={[styles.text, {marginTop: 10}]}>{talents(props.character).combat2.info}</Text>
                   <View style={styles.attributeInfoWrapper}>
                     <View
                       style={{
@@ -392,17 +384,9 @@ export const TalentTab = props => {
                               flexWrap: 'wrap',
                               width: '80%',
                             }}>
-                            <Text style={[styles.text, {fontSize: 15}]}>
-                              {item.label}
-                            </Text>
+                            <Text style={[styles.text, {fontSize: 15}]}>{item.label}</Text>
                           </View>
-                          <Text
-                            style={[
-                              styles.text,
-                              {fontSize: 15, color: 'white'},
-                            ]}>
-                            {item.value}
-                          </Text>
+                          <Text style={[styles.text, {fontSize: 15, color: 'white'}]}>{item.value}</Text>
                         </View>
                       );
                     })}
@@ -412,9 +396,7 @@ export const TalentTab = props => {
                       name="chevron-up"
                       size={20}
                       color={'white'}
-                      onPress={() =>
-                        setToggleSkills(prev => ({...prev, skill2: false}))
-                      }
+                      onPress={() => setToggleSkills(prev => ({...prev, skill2: false}))}
                     />
                   </Text>
                 </View>
@@ -425,16 +407,11 @@ export const TalentTab = props => {
               <View style={styles.talentName}>
                 <Image
                   source={{
-                    uri:
-                      IMAGE_URL +
-                      talents(props.character).images.combat3 +
-                      '.png',
+                    uri: IMAGE_URL + talents(props.character).images.combat3 + '.png',
                   }}
                   style={{width: 60, height: 60, marginBottom: 10}}
                 />
-                <Text style={[styles.heading, {textAlign: 'center'}]}>
-                  {talents(props.character).combat3.name}
-                </Text>
+                <Text style={[styles.heading, {textAlign: 'center'}]}>{talents(props.character).combat3.name}</Text>
                 {/* {toggleSkills.skill3 ? (
                   <ImageBackground
                     source={URL_SKILLS[2]}
@@ -457,17 +434,13 @@ export const TalentTab = props => {
                     name="chevron-down"
                     size={20}
                     color={'white'}
-                    onPress={() =>
-                      setToggleSkills(prev => ({...prev, skill3: true}))
-                    }
+                    onPress={() => setToggleSkills(prev => ({...prev, skill3: true}))}
                   />
                 </Text>
               )}
               {toggleSkills.skill3 ? (
                 <View style={{width: '100%'}}>
-                  <Text style={[styles.text, {marginTop: 10}]}>
-                    {talents(props.character).combat3.info}
-                  </Text>
+                  <Text style={[styles.text, {marginTop: 10}]}>{talents(props.character).combat3.info}</Text>
                   <View style={styles.attributeInfoWrapper}>
                     <View
                       style={{
@@ -506,17 +479,9 @@ export const TalentTab = props => {
                               flexWrap: 'wrap',
                               width: '80%',
                             }}>
-                            <Text style={[styles.text, {fontSize: 15}]}>
-                              {item.label}
-                            </Text>
+                            <Text style={[styles.text, {fontSize: 15}]}>{item.label}</Text>
                           </View>
-                          <Text
-                            style={[
-                              styles.text,
-                              {fontSize: 15, color: 'white'},
-                            ]}>
-                            {item.value}
-                          </Text>
+                          <Text style={[styles.text, {fontSize: 15, color: 'white'}]}>{item.value}</Text>
                         </View>
                       );
                     })}
@@ -526,9 +491,7 @@ export const TalentTab = props => {
                       name="chevron-up"
                       size={20}
                       color={'white'}
-                      onPress={() =>
-                        setToggleSkills(prev => ({...prev, skill3: false}))
-                      }
+                      onPress={() => setToggleSkills(prev => ({...prev, skill3: false}))}
                     />
                   </Text>
                 </View>
@@ -541,16 +504,11 @@ export const TalentTab = props => {
             <View style={styles.talenWrapper}>
               <Image
                 source={{
-                  uri:
-                    IMAGE_URL +
-                    talents(props.character).images.passive1 +
-                    '.png',
+                  uri: IMAGE_URL + talents(props.character).images.passive1 + '.png',
                 }}
                 style={{width: 60, height: 60, marginBottom: 10}}
               />
-              <Text style={[styles.heading, {textAlign: 'center'}]}>
-                {talents(props.character).passive1.name}
-              </Text>
+              <Text style={[styles.heading, {textAlign: 'center'}]}>{talents(props.character).passive1.name}</Text>
 
               {togglePassive.passive1 ? null : (
                 <Text style={{textAlign: 'center', marginTop: 10}}>
@@ -558,25 +516,19 @@ export const TalentTab = props => {
                     name="chevron-down"
                     size={20}
                     color={'white'}
-                    onPress={() =>
-                      setTogglePassive(prev => ({...prev, passive1: true}))
-                    }
+                    onPress={() => setTogglePassive(prev => ({...prev, passive1: true}))}
                   />
                 </Text>
               )}
               {togglePassive.passive1 ? (
                 <View>
-                  <Text style={[styles.text, {marginTop: 10}]}>
-                    {talents(props.character).passive1.info}
-                  </Text>
+                  <Text style={[styles.text, {marginTop: 10}]}>{talents(props.character).passive1.info}</Text>
                   <Text style={{textAlign: 'center'}}>
                     <Feather
                       name="chevron-up"
                       size={20}
                       color={'white'}
-                      onPress={() =>
-                        setTogglePassive(prev => ({...prev, passive1: false}))
-                      }
+                      onPress={() => setTogglePassive(prev => ({...prev, passive1: false}))}
                     />
                   </Text>
                 </View>
@@ -586,41 +538,30 @@ export const TalentTab = props => {
             <View style={styles.talenWrapper}>
               <Image
                 source={{
-                  uri:
-                    IMAGE_URL +
-                    talents(props.character).images.passive2 +
-                    '.png',
+                  uri: IMAGE_URL + talents(props.character).images.passive2 + '.png',
                 }}
                 style={{width: 60, height: 60, marginBottom: 10}}
               />
-              <Text style={[styles.heading, {textAlign: 'center'}]}>
-                {talents(props.character).passive2.name}
-              </Text>
+              <Text style={[styles.heading, {textAlign: 'center'}]}>{talents(props.character).passive2.name}</Text>
               {togglePassive.passive2 ? null : (
                 <Text style={{textAlign: 'center', marginTop: 10}}>
                   <Feather
                     name="chevron-down"
                     size={20}
                     color={'white'}
-                    onPress={() =>
-                      setTogglePassive(prev => ({...prev, passive2: true}))
-                    }
+                    onPress={() => setTogglePassive(prev => ({...prev, passive2: true}))}
                   />
                 </Text>
               )}
               {togglePassive.passive2 ? (
                 <View>
-                  <Text style={[styles.text, {marginTop: 10}]}>
-                    {talents(props.character).passive2.info}
-                  </Text>
+                  <Text style={[styles.text, {marginTop: 10}]}>{talents(props.character).passive2.info}</Text>
                   <Text style={{textAlign: 'center'}}>
                     <Feather
                       name="chevron-up"
                       size={20}
                       color={'white'}
-                      onPress={() =>
-                        setTogglePassive(prev => ({...prev, passive2: false}))
-                      }
+                      onPress={() => setTogglePassive(prev => ({...prev, passive2: false}))}
                     />
                   </Text>
                 </View>
@@ -630,49 +571,90 @@ export const TalentTab = props => {
             <View style={styles.talenWrapper}>
               <Image
                 source={{
-                  uri:
-                    IMAGE_URL +
-                    talents(props.character).images.passive3 +
-                    '.png',
+                  uri: IMAGE_URL + talents(props.character).images.passive3 + '.png',
                 }}
                 style={{width: 60, height: 60, marginBottom: 10}}
               />
-              <Text style={[styles.heading, {textAlign: 'center'}]}>
-                {talents(props.character).passive3.name}
-              </Text>
+              <Text style={[styles.heading, {textAlign: 'center'}]}>{talents(props.character).passive3.name}</Text>
               {togglePassive.passive3 ? null : (
                 <Text style={{textAlign: 'center', marginTop: 10}}>
                   <Feather
                     name="chevron-down"
                     size={20}
                     color={'white'}
-                    onPress={() =>
-                      setTogglePassive(prev => ({...prev, passive3: true}))
-                    }
+                    onPress={() => setTogglePassive(prev => ({...prev, passive3: true}))}
                   />
                 </Text>
               )}
               {togglePassive.passive3 ? (
                 <View>
-                  <Text style={[styles.text, {marginTop: 10}]}>
-                    {talents(props.character).passive3.info}
-                  </Text>
+                  <Text style={[styles.text, {marginTop: 10}]}>{talents(props.character).passive3.info}</Text>
                   <Text style={{textAlign: 'center'}}>
                     <Feather
                       name="chevron-up"
                       size={20}
                       color={'white'}
-                      onPress={() =>
-                        setTogglePassive(prev => ({...prev, passive3: false}))
-                      }
+                      onPress={() => setTogglePassive(prev => ({...prev, passive3: false}))}
                     />
                   </Text>
                 </View>
               ) : null}
             </View>
           </View>
+          {/* Material */}
+          <View style={styles.contentSection}>
+            <Text style={styles.heading}>Talent Materials</Text>
+            <View
+              style={[
+                styles.talenWrapper,
+                {
+                  backgroundColor: colors.contentBackground,
+                  width,
+                  justifyContent: 'space-between',
+                  paddingHorizontal: 0,
+                },
+              ]}>
+              {talentLevel.map((item, index) => (
+                <View
+                  key={index}
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    width: '100%',
+                    paddingHorizontal: 20,
+                    paddingVertical: 10,
+                    backgroundColor: index % 2 === 0 ? colors.contentBackground : colors.contentBackground2,
+                  }}>
+                  <Text style={[styles.text, {marginRight: 15, fontSize: 21}]}>{item.label}</Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}>
+                    {talents(props.character).costs[item.key].map((mat, i) => (
+                      <TouchableOpacity
+                        key={i}
+                        style={{alignItems: 'center'}}
+                        onPress={() => {
+                          setMaterialClicked(mat.name);
+                          setOpenModal(true);
+                        }}>
+                        <Image source={{uri: materials(mat.name).images.fandom}} style={{width: 45, height: 45}} />
+                        <Text style={styles.text}>{mat.count}</Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                </View>
+              ))}
+            </View>
+          </View>
         </View>
       </ScrollView>
+      {openModal ? (
+        <MaterialDialog visible={openModal} message={materialClicked} onCancel={() => setOpenModal(false)} />
+      ) : null}
     </View>
   );
 };

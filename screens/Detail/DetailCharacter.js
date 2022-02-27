@@ -18,20 +18,17 @@ import GenshinDB from 'genshin-db';
 import LinearGradient from 'react-native-linear-gradient';
 import {StatTab} from '../../components/Tab/Character/StatTab';
 import {CharacterTab} from '../../components/Tab/CharacterTab';
+import {MaterialDialog} from '../../components/Material/MaterialDialog';
 
 const {width} = Dimensions.get('window');
 
 export const DetailCharacter = props => {
   const [loading, setLoading] = useState(true);
   const character = props.route.params.character;
-  //   const [characterInfo, setCharacterInfo] = useState(
-  //     GenshinDB.characters(character),
-  //   );
   const tabContent = ['Stats', 'Talents', 'Constellations'];
   const [tab, setTab] = useState(tabContent[0]);
 
   useEffect(() => {
-    // console.log(GenshinDB.talents(character).costs.lvl10[1].name);
     setLoading(false);
     return () => {
       setTab(tabContent[0]);
@@ -49,12 +46,7 @@ export const DetailCharacter = props => {
   return (
     <View style={styles.container}>
       <View style={styles.headerWrapper}>
-        <Feather
-          name="arrow-left"
-          size={20}
-          color={'white'}
-          onPress={() => props.navigation.goBack()}
-        />
+        <Feather name="arrow-left" size={20} color={'white'} onPress={() => props.navigation.goBack()} />
       </View>
       <ScrollView>
         <View
@@ -67,11 +59,7 @@ export const DetailCharacter = props => {
           <View style={styles.contentWrapper}>
             <View style={styles.contentHeader}>
               <LinearGradient
-                colors={
-                  GenshinDB.characters(character).rarity === '5'
-                    ? colors.goldCard
-                    : colors.purpleCard
-                }
+                colors={GenshinDB.characters(character).rarity === '5' ? colors.goldCard : colors.purpleCard}
                 style={[styles.characterItem]}>
                 <Image
                   source={{
@@ -95,15 +83,12 @@ export const DetailCharacter = props => {
                       fontSize: 19,
                       marginRight: 5,
                     }}>
-                    {GenshinDB.characters(character).name} (
-                    {GenshinDB.characters(character).rarity}{' '}
+                    {GenshinDB.characters(character).name} ({GenshinDB.characters(character).rarity}{' '}
                     <Feather name="star" size={20} color={colors.textWhite} />)
                   </Text>
                   <Image
                     source={{
-                      uri: GenshinDB.elements(
-                        GenshinDB.characters(character).element,
-                      ).images.wikia,
+                      uri: GenshinDB.elements(GenshinDB.characters(character).element).images.wikia,
                     }}
                     style={{width: 20, height: 20}}
                   />
@@ -127,10 +112,7 @@ export const DetailCharacter = props => {
                   style={[
                     styles.tabName,
                     {
-                      backgroundColor:
-                        tabname === tab
-                          ? colors.background
-                          : colors.contentBackground,
+                      backgroundColor: tabname === tab ? colors.background : colors.contentBackground,
                     },
                   ]}
                   onPress={() => setTab(tabname)}>
@@ -154,6 +136,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: colors.background,
+    // opacity: 0.8,
   },
   headerWrapper: {
     flexDirection: 'row',

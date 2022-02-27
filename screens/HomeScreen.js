@@ -15,8 +15,6 @@ export const HomeScreen = props => {
   const [today, setToday] = useState(moment().format('dddd'));
 
   useEffect(() => {
-    // console.log(domains('Domain of Forgery: Ruins of Thirsting Capital I'));
-    console.log(getTodayCharacter('Monday', 'Weapon'));
     setLoading(false);
   });
 
@@ -97,9 +95,7 @@ export const HomeScreen = props => {
               <View style={{width: '100%'}}>
                 <View style={styles.characterWrapper}>
                   {item.characters.map((char, i) => (
-                    <TouchableOpacity
-                      key={i}
-                      onPress={() => props.navigation.navigate('DetailCharacter', {character: char})}>
+                    <TouchableOpacity key={i} onPress={() => props.navigation.navigate('DetailWeapon', {weapon: char})}>
                       {weapons(char).rarity === '5' ? (
                         <LinearGradient colors={colors.goldCard} style={[styles.characterItem]}>
                           <Image

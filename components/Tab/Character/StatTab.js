@@ -14,32 +14,19 @@ import {
 import GenshinDB, {characters, materials} from 'genshin-db';
 import {colors} from '../../../assets/colors/colors';
 import Feather from 'react-native-vector-icons/Feather';
+import {MaterialDialog} from '../../Material/MaterialDialog';
 
 const {width} = Dimensions.get('window');
 
 export const StatTab = props => {
   const [loading, setLoading] = useState(true);
-  const infos = [
-    'fullname',
-    'title',
-    'region',
-    'birthday',
-    'weapontype',
-    'gender',
-    'element',
-  ];
+  const [openModal, setOpenModal] = useState(false);
+  const [materialClicked, setMaterialClicked] = useState('');
+  const infos = ['fullname', 'title', 'region', 'birthday', 'weapontype', 'gender', 'element'];
   const [phase, setPhase] = useState(1);
   const [level, setLevel] = useState(20);
   let costs = characters(props.character).costs;
-  let ascensions = [
-    '_',
-    'ascend1',
-    'ascend2',
-    'ascend3',
-    'ascend4',
-    'ascend5',
-    'ascend6',
-  ];
+  let ascensions = ['_', 'ascend1', 'ascend2', 'ascend3', 'ascend4', 'ascend5', 'ascend6'];
 
   const increasePhase = () => {
     if (phase < 6) {
@@ -99,9 +86,7 @@ export const StatTab = props => {
                       <Text style={styles.text}>{info}</Text>
                     </View>
                     <View style={styles.bioRight}>
-                      <Text style={styles.text}>
-                        {characters(props.character)[info]}
-                      </Text>
+                      <Text style={styles.text}>{characters(props.character)[info]}</Text>
                     </View>
                   </View>
                 );
@@ -112,19 +97,9 @@ export const StatTab = props => {
           <View style={styles.contentSection}>
             <Text style={styles.heading}>Ascensions & Materials</Text>
             <View style={styles.updateQuantity}>
-              <Feather
-                name="minus-circle"
-                size={20}
-                color={colors.text}
-                onPress={() => decreasePhase()}
-              />
+              <Feather name="minus-circle" size={20} color={colors.text} onPress={() => decreasePhase()} />
               <Text style={styles.text}>Phase {phase}</Text>
-              <Feather
-                name="plus-circle"
-                size={20}
-                color={colors.text}
-                onPress={() => increasePhase()}
-              />
+              <Feather name="plus-circle" size={20} color={colors.text} onPress={() => increasePhase()} />
             </View>
             <View
               style={{
@@ -147,8 +122,7 @@ export const StatTab = props => {
                     ]}>
                     Level
                   </Text>
-                  <Text
-                    style={[styles.text, {fontSize: 17, textAlign: 'center'}]}>
+                  <Text style={[styles.text, {fontSize: 17, textAlign: 'center'}]}>
                     {characters(props.character).stats(level).level}
                   </Text>
                 </View>
@@ -165,8 +139,7 @@ export const StatTab = props => {
                     ]}>
                     Base HP
                   </Text>
-                  <Text
-                    style={[styles.text, {fontSize: 17, textAlign: 'center'}]}>
+                  <Text style={[styles.text, {fontSize: 17, textAlign: 'center'}]}>
                     {characters(props.character).stats(level).hp.toFixed(0)}
                   </Text>
                 </View>
@@ -183,8 +156,7 @@ export const StatTab = props => {
                     ]}>
                     Base ATK
                   </Text>
-                  <Text
-                    style={[styles.text, {fontSize: 17, textAlign: 'center'}]}>
+                  <Text style={[styles.text, {fontSize: 17, textAlign: 'center'}]}>
                     {characters(props.character).stats(level).attack.toFixed(0)}
                   </Text>
                 </View>
@@ -201,26 +173,24 @@ export const StatTab = props => {
                     ]}>
                     Base DEF
                   </Text>
-                  <Text
-                    style={[styles.text, {fontSize: 17, textAlign: 'center'}]}>
-                    {characters(props.character)
-                      .stats(level)
-                      .defense.toFixed(0)}
+                  <Text style={[styles.text, {fontSize: 17, textAlign: 'center'}]}>
+                    {characters(props.character).stats(level).defense.toFixed(0)}
                   </Text>
                 </View>
               </View>
               <View style={styles.materialWrapper}>
                 {costs[ascensions[phase]].map((item, index) => {
                   return (
-                    <View
+                    <TouchableOpacity
+                      onPress={() => {
+                        setMaterialClicked(item.name);
+                        setOpenModal(true);
+                      }}
                       key={index}
                       style={{justifyContent: 'center', alignItems: 'center'}}>
-                      <Image
-                        source={{uri: materials(item.name).images.fandom}}
-                        style={{width: 60, height: 60}}
-                      />
+                      <Image source={{uri: materials(item.name).images.fandom}} style={{width: 60, height: 60}} />
                       <Text style={styles.text}>{item.count}</Text>
-                    </View>
+                    </TouchableOpacity>
                   );
                 })}
               </View>
@@ -228,6 +198,9 @@ export const StatTab = props => {
           </View>
         </View>
       </ScrollView>
+      {openModal ? (
+        <MaterialDialog visible={openModal} message={materialClicked} onCancel={() => setOpenModal(false)} />
+      ) : null}
     </View>
   );
 };
