@@ -7,16 +7,7 @@
  */
 import 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ActivityIndicator,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View, Image, ActivityIndicator} from 'react-native';
 import GenshinDB, {elements} from 'genshin-db';
 import {colors} from './assets/colors/colors';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -31,6 +22,7 @@ import {SideMenu} from './components/Menu/SideMenu';
 import {DetailCharacter} from './screens/Detail/DetailCharacter';
 import {DetailWeapon} from './screens/Detail/DetailWeapon';
 import {HomeScreen} from './screens/HomeScreen';
+import {Todos} from './screens/Todos';
 
 Feather.loadFont();
 const Stack = createNativeStackNavigator();
@@ -64,31 +56,12 @@ export const App = () => {
           initialRouteName="HomeScreen"
           backBehavior="history"
           drawerContent={props => <SideMenu {...props} />}>
-          <Drawer.Screen
-            component={HomeScreen}
-            name="HomeScreen"
-            options={{headerShown: false}}
-          />
-          <Drawer.Screen
-            component={Characters}
-            name="Characters"
-            options={{headerShown: false}}
-          />
-          <Drawer.Screen
-            component={WeaponScreen}
-            name="WeaponScreen"
-            options={{headerShown: false}}
-          />
-          <Drawer.Screen
-            component={DetailCharacter}
-            name="DetailCharacter"
-            options={{headerShown: false}}
-          />
-          <Drawer.Screen
-            component={DetailWeapon}
-            name="DetailWeapon"
-            options={{headerShown: false}}
-          />
+          <Drawer.Screen component={HomeScreen} name="HomeScreen" options={{headerShown: false}} />
+          <Drawer.Screen component={Characters} name="Characters" options={{headerShown: false}} />
+          <Drawer.Screen component={WeaponScreen} name="WeaponScreen" options={{headerShown: false}} />
+          <Drawer.Screen component={DetailCharacter} name="DetailCharacter" options={{headerShown: false}} />
+          <Drawer.Screen component={DetailWeapon} name="DetailWeapon" options={{headerShown: false}} />
+          <Drawer.Screen component={Todos} name="Todos" options={{headerShown: false}} />
         </Drawer.Navigator>
       </NavigationContainer>
     );

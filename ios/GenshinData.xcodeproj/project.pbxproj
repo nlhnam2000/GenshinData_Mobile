@@ -11,9 +11,9 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		24CE123EC7DC1B7C1841C6A7 /* libPods-GenshinData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4837EA47A6FF39E9DF1EC148 /* libPods-GenshinData.a */; };
+		3A0BD6A2BFB6E6AEF82E3EAE /* libPods-GenshinData-GenshinDataTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B47833136F2F3F62592EADF7 /* libPods-GenshinData-GenshinDataTests.a */; };
+		3F2312A7840887669020D542 /* libPods-GenshinData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 354F077B526F3A7D3DB34EC1 /* libPods-GenshinData.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		C9E982094E24EB212ABCD4D2 /* libPods-GenshinData-GenshinDataTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B69AA13D6CA64F1288B227B /* libPods-GenshinData-GenshinDataTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,14 +36,14 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = GenshinData/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GenshinData/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = GenshinData/main.m; sourceTree = "<group>"; };
-		3DBC43CB0FA9261443B2D34E /* Pods-GenshinData-GenshinDataTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenshinData-GenshinDataTests.debug.xcconfig"; path = "Target Support Files/Pods-GenshinData-GenshinDataTests/Pods-GenshinData-GenshinDataTests.debug.xcconfig"; sourceTree = "<group>"; };
-		4837EA47A6FF39E9DF1EC148 /* libPods-GenshinData.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GenshinData.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B69AA13D6CA64F1288B227B /* libPods-GenshinData-GenshinDataTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GenshinData-GenshinDataTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		687E12D79B55FCDAA96452B8 /* Pods-GenshinData-GenshinDataTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenshinData-GenshinDataTests.release.xcconfig"; path = "Target Support Files/Pods-GenshinData-GenshinDataTests/Pods-GenshinData-GenshinDataTests.release.xcconfig"; sourceTree = "<group>"; };
+		207331895D75EEDECF56C1D7 /* Pods-GenshinData.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenshinData.debug.xcconfig"; path = "Target Support Files/Pods-GenshinData/Pods-GenshinData.debug.xcconfig"; sourceTree = "<group>"; };
+		354F077B526F3A7D3DB34EC1 /* libPods-GenshinData.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GenshinData.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C3B31951063EDF42292BDE0 /* Pods-GenshinData.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenshinData.release.xcconfig"; path = "Target Support Files/Pods-GenshinData/Pods-GenshinData.release.xcconfig"; sourceTree = "<group>"; };
+		60B4A8F539EF6EF7742B1565 /* Pods-GenshinData-GenshinDataTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenshinData-GenshinDataTests.release.xcconfig"; path = "Target Support Files/Pods-GenshinData-GenshinDataTests/Pods-GenshinData-GenshinDataTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = GenshinData/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		BEC42BA8788041ED44B920F7 /* Pods-GenshinData.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenshinData.debug.xcconfig"; path = "Target Support Files/Pods-GenshinData/Pods-GenshinData.debug.xcconfig"; sourceTree = "<group>"; };
+		B47833136F2F3F62592EADF7 /* libPods-GenshinData-GenshinDataTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GenshinData-GenshinDataTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0A13AAE7E17B14C01359273 /* Pods-GenshinData-GenshinDataTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenshinData-GenshinDataTests.debug.xcconfig"; path = "Target Support Files/Pods-GenshinData-GenshinDataTests/Pods-GenshinData-GenshinDataTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F0A01EB5AF64CF899B084E21 /* Pods-GenshinData.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenshinData.release.xcconfig"; path = "Target Support Files/Pods-GenshinData/Pods-GenshinData.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9E982094E24EB212ABCD4D2 /* libPods-GenshinData-GenshinDataTests.a in Frameworks */,
+				3A0BD6A2BFB6E6AEF82E3EAE /* libPods-GenshinData-GenshinDataTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24CE123EC7DC1B7C1841C6A7 /* libPods-GenshinData.a in Frameworks */,
+				3F2312A7840887669020D542 /* libPods-GenshinData.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,26 +96,26 @@
 			name = GenshinData;
 			sourceTree = "<group>";
 		};
+		19083A6BD4DC63A81AD53C48 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				207331895D75EEDECF56C1D7 /* Pods-GenshinData.debug.xcconfig */,
+				5C3B31951063EDF42292BDE0 /* Pods-GenshinData.release.xcconfig */,
+				E0A13AAE7E17B14C01359273 /* Pods-GenshinData-GenshinDataTests.debug.xcconfig */,
+				60B4A8F539EF6EF7742B1565 /* Pods-GenshinData-GenshinDataTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				4837EA47A6FF39E9DF1EC148 /* libPods-GenshinData.a */,
-				4B69AA13D6CA64F1288B227B /* libPods-GenshinData-GenshinDataTests.a */,
+				354F077B526F3A7D3DB34EC1 /* libPods-GenshinData.a */,
+				B47833136F2F3F62592EADF7 /* libPods-GenshinData-GenshinDataTests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4328D9471FFD8805B9AEF37C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				BEC42BA8788041ED44B920F7 /* Pods-GenshinData.debug.xcconfig */,
-				F0A01EB5AF64CF899B084E21 /* Pods-GenshinData.release.xcconfig */,
-				3DBC43CB0FA9261443B2D34E /* Pods-GenshinData-GenshinDataTests.debug.xcconfig */,
-				687E12D79B55FCDAA96452B8 /* Pods-GenshinData-GenshinDataTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -133,7 +133,7 @@
 				00E356EF1AD99517003FC87E /* GenshinDataTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				4328D9471FFD8805B9AEF37C /* Pods */,
+				19083A6BD4DC63A81AD53C48 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -156,11 +156,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "GenshinDataTests" */;
 			buildPhases = (
-				185B960D21588FA5DD4D1E11 /* [CP] Check Pods Manifest.lock */,
+				014B3E5006053BEC95AE4097 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				B317D8187E7482F1248EDC62 /* [CP] Copy Pods Resources */,
+				A1FE9FDA283C925B5D688E77 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,13 +176,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "GenshinData" */;
 			buildPhases = (
-				F382961B5D1439071857B243 /* [CP] Check Pods Manifest.lock */,
+				14B6DC65549732387B33C5D8 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				A0F6D25C64EDEA31075B44C5 /* [CP] Copy Pods Resources */,
+				99E73B0D2D0EED81F99C211C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -263,7 +263,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		185B960D21588FA5DD4D1E11 /* [CP] Check Pods Manifest.lock */ = {
+		014B3E5006053BEC95AE4097 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -285,41 +285,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A0F6D25C64EDEA31075B44C5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GenshinData/Pods-GenshinData-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GenshinData/Pods-GenshinData-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GenshinData/Pods-GenshinData-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B317D8187E7482F1248EDC62 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GenshinData-GenshinDataTests/Pods-GenshinData-GenshinDataTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GenshinData-GenshinDataTests/Pods-GenshinData-GenshinDataTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GenshinData-GenshinDataTests/Pods-GenshinData-GenshinDataTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F382961B5D1439071857B243 /* [CP] Check Pods Manifest.lock */ = {
+		14B6DC65549732387B33C5D8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -339,6 +305,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		99E73B0D2D0EED81F99C211C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GenshinData/Pods-GenshinData-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GenshinData/Pods-GenshinData-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GenshinData/Pods-GenshinData-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1FE9FDA283C925B5D688E77 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GenshinData-GenshinDataTests/Pods-GenshinData-GenshinDataTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GenshinData-GenshinDataTests/Pods-GenshinData-GenshinDataTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GenshinData-GenshinDataTests/Pods-GenshinData-GenshinDataTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -393,7 +393,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DBC43CB0FA9261443B2D34E /* Pods-GenshinData-GenshinDataTests.debug.xcconfig */;
+			baseConfigurationReference = E0A13AAE7E17B14C01359273 /* Pods-GenshinData-GenshinDataTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -420,7 +420,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 687E12D79B55FCDAA96452B8 /* Pods-GenshinData-GenshinDataTests.release.xcconfig */;
+			baseConfigurationReference = 60B4A8F539EF6EF7742B1565 /* Pods-GenshinData-GenshinDataTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -444,7 +444,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BEC42BA8788041ED44B920F7 /* Pods-GenshinData.debug.xcconfig */;
+			baseConfigurationReference = 207331895D75EEDECF56C1D7 /* Pods-GenshinData.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -470,7 +470,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0A01EB5AF64CF899B084E21 /* Pods-GenshinData.release.xcconfig */;
+			baseConfigurationReference = 5C3B31951063EDF42292BDE0 /* Pods-GenshinData.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
