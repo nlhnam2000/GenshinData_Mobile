@@ -19,6 +19,7 @@ import {colors} from '../assets/colors/colors';
 import {Navbar} from '../components/Menu/Navbar';
 import Feather from 'react-native-vector-icons/Feather';
 import {Task} from '../components/Task/Task';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Todos = props => {
   const [loading, setLoading] = useState(true);
@@ -27,22 +28,31 @@ export const Todos = props => {
   const inputRef = useRef();
 
   useEffect(() => {
-    setLoading(false);
+    const LoadTodoList = async () => {
+      const todo = await AsyncStorage.getItem('@todoList');
+      setTaskItem(todo !== null ? JSON.parse(todo) : []);
+      setLoading(false);
+    };
+
+    LoadTodoList();
   }, []);
 
-  const addTask = () => {
+  const addTask = async () => {
     if (task !== null || task !== '') {
       Keyboard.dismiss();
-      setTaskItem(prev => [...prev, task]);
+      let newTodo = [...taskItem, task];
+      setTaskItem(newTodo);
+      await AsyncStorage.setItem('@todoList', JSON.stringify(newTodo));
       setTask(null);
       inputRef.current.clear();
     }
   };
 
-  const deleteTask = index => {
+  const deleteTask = async index => {
     let copy = [...taskItem];
     copy.splice(index, 1);
     setTaskItem(copy);
+    await AsyncStorage.setItem('@todoList', JSON.stringify(copy));
   };
 
   if (loading) {
@@ -57,7 +67,7 @@ export const Todos = props => {
     <View style={styles.container}>
       <Navbar label="Todo list" />
       <SafeAreaView style={styles.wrapper}>
-        <ScrollView style={{width: '100%', height: '80%', padding: 20}}>
+        <ScrollView style={{width: '100%', height: '80%', padding: 10}}>
           <Text style={styles.heading}>Create your todo list here</Text>
           {taskItem.map((task, index) => (
             <TouchableOpacity key={index} onPress={() => deleteTask(index)}>
@@ -67,7 +77,15 @@ export const Todos = props => {
         </ScrollView>
       </SafeAreaView>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.keyboardWrapper}>
-        <TextInput style={styles.inputField} onChangeText={text => setTask(text)} ref={inputRef} />
+        <TextInput
+          style={styles.inputField}
+          onChangeText={text => setTask(text)}
+          ref={inputRef}
+          onSubmitEditing={event => {
+            addTask();
+          }}
+          returnKeyType="done"
+        />
         <TouchableOpacity
           onPress={() => addTask()}
           style={{padding: 10, borderRadius: 40, backgroundColor: colors.contentBackground2}}>

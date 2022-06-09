@@ -23,6 +23,8 @@ import {DetailCharacter} from './screens/Detail/DetailCharacter';
 import {DetailWeapon} from './screens/Detail/DetailWeapon';
 import {HomeScreen} from './screens/HomeScreen';
 import {Todos} from './screens/Todos';
+import {Hoyolab} from './screens/Hoyolab';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 Feather.loadFont();
 const Stack = createNativeStackNavigator();
@@ -30,16 +32,22 @@ const Drawer = createDrawerNavigator();
 
 export const App = () => {
   const [loading, setLoading] = useState(true);
+  StatusBar.setBarStyle('light-content', true);
 
   useEffect(() => {
-    //GenshinDB.setOptions({resultLanguage: 'Vietnamese'});
-    // console.log(
-    //   GenshinDB.characters('Mondstatd', {
-    //     matchCategories: true,
-    //     resultLanguage: 'English',
-    //   }),
-    // );
-    // console.log(GenshinDB.materials('Agnidus Agate Sliver'));
+    setTimeout(async () => {
+      await AsyncStorage.removeItem('@hoyolab');
+      await AsyncStorage.setItem(
+        '@hoyolab',
+        JSON.stringify({
+          ltuid: 65341511,
+          ltoken: 'cijhdhiowQyHmi1rBGKAi9N389tEzx7YcjrzC15r',
+          uid: 810304219,
+        }),
+      );
+      setLoading(false);
+    }, 1000);
+
     setLoading(false);
   }, []);
 
@@ -62,6 +70,7 @@ export const App = () => {
           <Drawer.Screen component={DetailCharacter} name="DetailCharacter" options={{headerShown: false}} />
           <Drawer.Screen component={DetailWeapon} name="DetailWeapon" options={{headerShown: false}} />
           <Drawer.Screen component={Todos} name="Todos" options={{headerShown: false}} />
+          <Drawer.Screen component={Hoyolab} name="Hoyolab" options={{headerShown: false}} />
         </Drawer.Navigator>
       </NavigationContainer>
     );

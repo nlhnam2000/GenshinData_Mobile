@@ -117,3 +117,7 @@ export const getTodayCharacter = (day, type) => {
 
   return result;
 };
+
+export const UppercaseFirstLetter = str => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};

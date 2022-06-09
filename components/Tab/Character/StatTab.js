@@ -14,7 +14,8 @@ import {
 import GenshinDB, {characters, materials} from 'genshin-db';
 import {colors} from '../../../assets/colors/colors';
 import Feather from 'react-native-vector-icons/Feather';
-import {MaterialDialog} from '../../Material/MaterialDialog';
+import {MaterialDialog} from '../../Dialog/MaterialDialog';
+import {UppercaseFirstLetter} from '../../../global';
 
 const {width} = Dimensions.get('window');
 
@@ -83,7 +84,7 @@ export const StatTab = props => {
                 return (
                   <View style={styles.bioWrapper} key={index}>
                     <View style={styles.bioLeft}>
-                      <Text style={styles.text}>{info}</Text>
+                      <Text style={styles.text}>{UppercaseFirstLetter(info)}</Text>
                     </View>
                     <View style={styles.bioRight}>
                       <Text style={styles.text}>{characters(props.character)[info]}</Text>
@@ -97,9 +98,13 @@ export const StatTab = props => {
           <View style={styles.contentSection}>
             <Text style={styles.heading}>Ascensions & Materials</Text>
             <View style={styles.updateQuantity}>
-              <Feather name="minus-circle" size={20} color={colors.text} onPress={() => decreasePhase()} />
+              <TouchableOpacity onPress={() => decreasePhase()}>
+                <Feather name="minus-circle" size={25} color={colors.text} />
+              </TouchableOpacity>
               <Text style={styles.text}>Phase {phase}</Text>
-              <Feather name="plus-circle" size={20} color={colors.text} onPress={() => increasePhase()} />
+              <TouchableOpacity onPress={() => increasePhase()}>
+                <Feather name="plus-circle" size={25} color={colors.text} />
+              </TouchableOpacity>
             </View>
             <View
               style={{
@@ -210,6 +215,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colors.background,
   },
   wrapper: {
     width,

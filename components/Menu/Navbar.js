@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   Dimensions,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import {colors} from '../../assets/colors/colors';
 import Feather from 'react-native-vector-icons/Feather';
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: colors.background,
-    marginTop: 60,
+    marginTop: Platform.OS === 'ios' ? 60 : 0,
   },
   headerWrapper: {
     width: width,

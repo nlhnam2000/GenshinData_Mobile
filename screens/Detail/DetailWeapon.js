@@ -10,17 +10,20 @@ import {
   ActivityIndicator,
   Dimensions,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import {colors} from '../../assets/colors/colors';
 import Feather from 'react-native-vector-icons/Feather';
 import GenshinDB from 'genshin-db';
 import LinearGradient from 'react-native-linear-gradient';
 import Markdown from 'react-native-markdown-package';
-import {MaterialDialog} from '../../components/Material/MaterialDialog';
+import {MaterialDialog} from '../../components/Dialog/MaterialDialog';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const {width} = Dimensions.get('window');
 
 export const DetailWeapon = props => {
+  const insets = useSafeAreaInsets();
   const [loading, setLoading] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [materialClicked, setMaterialClicked] = useState('');
@@ -129,7 +132,7 @@ export const DetailWeapon = props => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {paddingTop: Platform.OS === 'ios' ? insets.top : 10}]}>
       <View style={styles.headerWrapper}>
         <Feather name="arrow-left" size={20} color={'white'} onPress={() => props.navigation.goBack('WeaponScreen')} />
       </View>
@@ -423,7 +426,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 60,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     width: '100%',
   },
   contentWrapper: {

@@ -16,7 +16,7 @@ import {colors} from '../../../assets/colors/colors';
 import {materials, talents} from 'genshin-db';
 import Feather from 'react-native-vector-icons/Feather';
 import {IMAGE_URL} from '../../../global';
-import {MaterialDialog} from '../../Material/MaterialDialog';
+import {MaterialDialog} from '../../Dialog/MaterialDialog';
 import {color} from 'react-native-reanimated';
 
 const {width, height} = Dimensions.get('window');
@@ -94,7 +94,7 @@ export const TalentTab = props => {
       let str = label.split('|')[1];
       let params = [];
 
-      if (label.includes('/' || 'Low/High Plunge DMG')) {
+      if (label.includes('Low/High Plunge DMG')) {
         params.push(str.substring(str.indexOf('{') + 1, str.indexOf('}')));
         params.push(str.substring(str.indexOf('/') + 2, str.lastIndexOf('}')));
       } else if (label.includes('+' || 'Charged Attack DMG')) {
@@ -180,24 +180,7 @@ export const TalentTab = props => {
   };
 
   useEffect(() => {
-    console.log(talents(props.character).combat1.attributes);
     setLoading(false);
-
-    return () => {
-      // setLevel(prev => ({...prev, skill1: 1, skill2: 1, skill3: 1}));
-      // setToggleSkills(prev => ({
-      //   ...prev,
-      //   skill1: false,
-      //   skill2: false,
-      //   skill3: false,
-      // }));
-      // setTogglePassive(prev => ({
-      //   ...prev,
-      //   passive1: false,
-      //   passive2: false,
-      //   passive3: false,
-      // }));
-    };
   });
   if (loading) {
     return (
@@ -664,6 +647,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colors.background,
   },
   wrapper: {
     width,

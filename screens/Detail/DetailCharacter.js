@@ -11,28 +11,32 @@ import {
   Dimensions,
   TouchableOpacity,
   Button,
+  Platform,
 } from 'react-native';
 import {colors} from '../../assets/colors/colors';
 import Feather from 'react-native-vector-icons/Feather';
 import GenshinDB from 'genshin-db';
 import LinearGradient from 'react-native-linear-gradient';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+
+// components
 import {StatTab} from '../../components/Tab/Character/StatTab';
 import {CharacterTab} from '../../components/Tab/CharacterTab';
-import {MaterialDialog} from '../../components/Material/MaterialDialog';
+import {TalentTab} from '../../components/Tab/Character/TalentTab';
+import {ConstellationTab} from '../../components/Tab/Character/ConstellationTab';
+import {MaterialDialog} from '../../components/Dialog/MaterialDialog';
 
-const {width} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
+const Tab = createMaterialTopTabNavigator();
 
 export const DetailCharacter = props => {
+  const insets = useSafeAreaInsets();
   const [loading, setLoading] = useState(true);
   const character = props.route.params.character;
-  const tabContent = ['Stats', 'Talents', 'Constellations'];
-  const [tab, setTab] = useState(tabContent[0]);
 
   useEffect(() => {
     setLoading(false);
-    return () => {
-      setTab(tabContent[0]);
-    };
   }, []);
 
   if (loading) {
@@ -44,88 +48,82 @@ export const DetailCharacter = props => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {paddingTop: Platform.OS === 'ios' ? insets.top : 10}]}>
       <View style={styles.headerWrapper}>
         <Feather name="arrow-left" size={20} color={'white'} onPress={() => props.navigation.goBack()} />
       </View>
-      <ScrollView>
-        <View
-          style={{
-            width,
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingHorizontal: 20,
-          }}>
-          <View style={styles.contentWrapper}>
-            <View style={styles.contentHeader}>
-              <LinearGradient
-                colors={GenshinDB.characters(character).rarity === '5' ? colors.goldCard : colors.purpleCard}
-                style={[styles.characterItem]}>
-                <Image
-                  source={{
-                    uri: GenshinDB.characters(character).images.icon,
-                  }}
-                  style={{width: 80, height: 80}}
-                />
-              </LinearGradient>
+      <View
+        style={{
+          width,
+          // justifyContent: 'center',
+          alignItems: 'center',
+          paddingHorizontal: 20,
+        }}>
+        <View style={styles.contentWrapper}>
+          <View style={styles.contentHeader}>
+            <LinearGradient
+              colors={GenshinDB.characters(character).rarity === '5' ? colors.goldCard : colors.purpleCard}
+              style={[styles.characterItem]}>
+              <Image
+                source={{
+                  uri: GenshinDB.characters(character).images.icon,
+                }}
+                style={{width: 80, height: 80}}
+              />
+            </LinearGradient>
 
-              <View style={styles.descriptionWrapper}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'flex-start',
-                    justifyContent: 'flex-start',
-                  }}>
-                  <Text
-                    style={{
-                      color: colors.textWhite,
-                      fontWeight: 'bold',
-                      fontSize: 19,
-                      marginRight: 5,
-                    }}>
-                    {GenshinDB.characters(character).name} ({GenshinDB.characters(character).rarity}{' '}
-                    <Feather name="star" size={20} color={colors.textWhite} />)
-                  </Text>
-                  <Image
-                    source={{
-                      uri: GenshinDB.elements(GenshinDB.characters(character).element).images.wikia,
-                    }}
-                    style={{width: 20, height: 20}}
-                  />
-                </View>
+            <View style={styles.descriptionWrapper}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'flex-start',
+                  justifyContent: 'flex-start',
+                }}>
                 <Text
                   style={{
                     color: colors.textWhite,
                     fontWeight: 'bold',
+                    fontSize: 19,
+                    marginRight: 5,
                   }}>
-                  {GenshinDB.characters(character).description}
+                  {GenshinDB.characters(character).name} ({GenshinDB.characters(character).rarity}{' '}
+                  <Feather name="star" size={20} color={colors.textWhite} />)
                 </Text>
+                <Image
+                  source={{
+                    uri: GenshinDB.elements(GenshinDB.characters(character).element).images.wikia,
+                  }}
+                  style={{width: 20, height: 20}}
+                />
               </View>
+              <Text
+                style={{
+                  color: colors.textWhite,
+                  fontWeight: 'bold',
+                }}>
+                {GenshinDB.characters(character).description}
+              </Text>
             </View>
           </View>
-          {/* Tab */}
-          <View style={styles.tabWrapper}>
-            {tabContent.map((tabname, index) => {
-              return (
-                <TouchableOpacity
-                  key={index}
-                  style={[
-                    styles.tabName,
-                    {
-                      backgroundColor: tabname === tab ? colors.background : colors.contentBackground,
-                    },
-                  ]}
-                  onPress={() => setTab(tabname)}>
-                  <Text style={styles.tabText}>{tabname}</Text>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-          <View style={{width}}>
-            <CharacterTab tabname={tab} character={character} />
-          </View>
         </View>
-      </ScrollView>
+        {/* Tab */}
+      </View>
+      <View
+        style={[styles.container, {marginTop: 20, borderBottomColor: colors.contentBackground, borderBottomWidth: 1}]}>
+        <Tab.Navigator
+          initialRouteName="example"
+          screenOptions={{
+            tabBarPressColor: colors.contentBackground,
+            tabBarIndicatorStyle: {backgroundColor: 'white'},
+            tabBarLabelStyle: {fontWeight: '600', fontSize: 12, color: 'white'},
+            tabBarStyle: {backgroundColor: colors.contentBackground},
+            tabBarActiveTintColor: 'black',
+          }}>
+          <Tab.Screen name="Stat" children={() => <StatTab character={character} {...props} />} />
+          <Tab.Screen name="Talent" children={() => <TalentTab character={character} {...props} />} />
+          <Tab.Screen name="Constellation" children={() => <ConstellationTab character={character} {...props} />} />
+        </Tab.Navigator>
+      </View>
     </View>
   );
 };
@@ -133,8 +131,6 @@ export const DetailCharacter = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
     backgroundColor: colors.background,
     // opacity: 0.8,
   },
@@ -142,8 +138,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 60,
-    paddingHorizontal: 20,
+    // marginTop: 60,
+    paddingHorizontal: 10,
     width: '100%',
   },
   contentHeader: {
@@ -171,10 +167,7 @@ const styles = StyleSheet.create({
   },
   tabWrapper: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     marginTop: 20,
-    width,
   },
   tabName: {
     width: '33%',

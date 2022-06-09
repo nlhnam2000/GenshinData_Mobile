@@ -42,16 +42,10 @@ export const ConstellationTab = props => {
               return (
                 <View key={index} style={styles.constellationWrapper}>
                   <View style={styles.constellationName}>
-                    <Text
-                      style={[
-                        styles.text,
-                        {textAlign: 'center', color: 'white', marginBottom: 10},
-                      ]}>
+                    <Text style={[styles.text, {textAlign: 'center', color: 'white', marginBottom: 10}]}>
                       {constellations(props.character)[c[index]].name}
                     </Text>
-                    <Text style={[styles.text, {opacity: 0.4}]}>
-                      Constellation lv.{index + 1}
-                    </Text>
+                    <Text style={[styles.text, {opacity: 0.4}]}>Constellation lv.{index + 1}</Text>
                   </View>
                   <View
                     style={{
@@ -77,6 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colors.background,
   },
   wrapper: {
     width,

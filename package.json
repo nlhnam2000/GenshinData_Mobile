@@ -10,10 +10,13 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.16.1",
     "@react-navigation/drawer": "^6.3.1",
+    "@react-navigation/material-top-tabs": "^6.2.1",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
-    "genshin-db": "^4.1.0",
+    "axios": "^0.26.0",
+    "genshin-db": "^4.2.0",
     "moment": "^2.29.1",
     "react": "17.0.2",
     "react-native": "0.67.2",
@@ -21,10 +24,14 @@
     "react-native-gesture-handler": "^2.1.1",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-markdown-package": "^1.8.1",
+    "react-native-pager-view": "^5.4.24",
     "react-native-reanimated": "^2.4.1",
     "react-native-safe-area-context": "^3.4.1",
     "react-native-screens": "^3.12.0",
-    "react-native-vector-icons": "^9.1.0"
+    "react-native-tab-view": "^3.1.1",
+    "react-native-vector-icons": "^9.1.0",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",

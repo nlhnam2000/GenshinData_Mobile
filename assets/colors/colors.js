@@ -2,6 +2,7 @@ export const colors = {
   background: 'rgb(27,29,38)',
   contentBackground: 'rgb(36,39,51)',
   contentBackground2: 'rgb(45,49,62)',
+  contentBackgroundBlured: 'rgba(36,39,51,0.7)',
   goldCard: ['rgb(100,75,80)', 'rgb(111,89,84)', 'rgb(140,99,88)', 'rgb(189,146,90)', 'rgb(216,168,98)'],
   purpleCard: ['rgb(82,97,129)', 'rgb(96,89,132)', 'rgb(114,98,138)', 'rgb(159,127,182)', 'rgb(171,134,193)'],
   blueCard: ['rgb(82,86,115)', 'rgb(82,90,119)', 'rgb(84,106,134)', 'rgb(89,130,154)', 'rgb(94,154,175)'],
