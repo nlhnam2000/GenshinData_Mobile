@@ -27,8 +27,16 @@ export const SideMenu = props => {
           labelStyle={{color: 'white', fontWeight: '600', fontSize: 18}}
           onPress={() => props.navigation.navigate('Todos')}
         />
-        <DrawerItem label={'Database'} labelStyle={{color: 'white', fontWeight: '600', fontSize: 18}} />
-        <DrawerItem label={'Sync with Hoyolab'} labelStyle={{color: 'white', fontWeight: '600', fontSize: 18}} onPress={() => props.navigation.navigate('Hoyolab')} />
+        <DrawerItem
+          label={'Database'}
+          labelStyle={{color: 'white', fontWeight: '600', fontSize: 18}}
+          onPress={() => props.navigation.navigate('Database')}
+        />
+        <DrawerItem
+          label={'Sync with Hoyolab'}
+          labelStyle={{color: 'white', fontWeight: '600', fontSize: 18}}
+          onPress={() => props.navigation.navigate('Hoyolab')}
+        />
       </View>
     </DrawerContentScrollView>
   );

@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,6 +12,7 @@ import {
   Dimensions,
   TouchableOpacity,
   Platform,
+  BackHandler,
 } from 'react-native';
 import {colors} from '../../assets/colors/colors';
 import Feather from 'react-native-vector-icons/Feather';
@@ -118,6 +120,21 @@ export const DetailWeapon = props => {
     }
   };
 
+  useFocusEffect(
+    useCallback(() => {
+      const hanldeBackButton = () => {
+        setOpenModal(false);
+        props.navigation.goBack();
+
+        return true;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', hanldeBackButton);
+
+      return () => BackHandler.removeEventListener('hardwareBackPress', hanldeBackButton);
+    }, [openModal]),
+  );
+
   useEffect(() => {
     // console.log(GenshinDB.weapons(weapon).costs['ascend' + 1]);
     setLoading(false);
@@ -134,7 +151,7 @@ export const DetailWeapon = props => {
   return (
     <View style={[styles.container, {paddingTop: Platform.OS === 'ios' ? insets.top : 10}]}>
       <View style={styles.headerWrapper}>
-        <Feather name="arrow-left" size={20} color={'white'} onPress={() => props.navigation.goBack('WeaponScreen')} />
+        <Feather name="arrow-left" size={24} color={'white'} onPress={() => props.navigation.goBack('WeaponScreen')} />
       </View>
       <ScrollView>
         <View
@@ -212,7 +229,7 @@ export const DetailWeapon = props => {
                       marginRight: 5,
                     }}>
                     {GenshinDB.weapons(weapon).name} ({GenshinDB.weapons(weapon).rarity}{' '}
-                    <Feather name="star" size={20} color={colors.textWhite} />)
+                    <Feather name="star" size={24} color={colors.textWhite} />)
                   </Text>
                 </View>
                 <Text
@@ -425,7 +442,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 60,
     paddingHorizontal: 10,
     width: '100%',
   },

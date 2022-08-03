@@ -89,7 +89,7 @@ export const Todos = props => {
         <TouchableOpacity
           onPress={() => addTask()}
           style={{padding: 10, borderRadius: 40, backgroundColor: colors.contentBackground2}}>
-          <Feather name="plus" size={20} color="white" />
+          <Feather name="plus" size={24} color="white" />
         </TouchableOpacity>
       </KeyboardAvoidingView>
     </View>

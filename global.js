@@ -1,5 +1,7 @@
 import {characters, weapons, domains, talents, materials} from 'genshin-db';
 export const IMAGE_URL = 'https://res.cloudinary.com/genshin/image/upload/sprites/';
+// export const SERVER_HOST = 'https://004f-171-227-161-22.ngrok.io';
+export const SERVER_HOST = 'http://localhost:8000';
 
 export const sortedWeapons = () => {
   let arr = [];
@@ -120,4 +122,20 @@ export const getTodayCharacter = (day, type) => {
 
 export const UppercaseFirstLetter = str => {
   return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+export const GetAuthenticationFromHoyolab = (str, uid) => {
+  let obj = {
+    ltuid: 0,
+    ltoken: '',
+    uid: uid,
+  };
+
+  str.split('; ').forEach(s => {
+    if (s.split('=')[0] === 'ltuid' || s.split('=')[0] === 'ltoken') {
+      obj[s.split('=')[0]] = s.split('=')[1];
+    }
+  });
+
+  return obj;
 };

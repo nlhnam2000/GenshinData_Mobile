@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect, useRef} from 'react';
 import {
   View,
   Text,
@@ -12,73 +12,75 @@ import {
   ImageBackground,
   ScrollView,
   Button,
+  Dimensions,
 } from 'react-native';
 import {colors} from '../assets/colors/colors';
 import {Navbar} from '../components/Menu/Navbar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Feather from 'react-native-vector-icons/Feather';
 import axios from 'axios';
+import FastImage from 'react-native-fast-image';
 import {Avatar} from '../components/Avatar/Avatar';
-import GenshinDB from 'genshin-db';
+import {SERVER_HOST, GetAuthenticationFromHoyolab} from '../global';
+
+const {width, height} = Dimensions.get('window');
 
 export const Hoyolab = props => {
   const [loading, setLoading] = useState(true);
   const [hoyolabData, setHoyolabData] = useState(null);
+  const scrollRef = useRef();
   const [openModal, setOpenModal] = useState(false);
-  const [ltuid, setLtuid] = useState(0);
-  const [ltoken, setLtoken] = useState('');
-  const [uid, setUid] = useState(0);
+  // const [formData, setFormData] = useState({
+  //   ltuid: 0,
+  //   ltoken: '',
+  //   uid: 0,
+  // });
+  const [UID, setUID] = useState(0);
+  const [cookie, setCookie] = useState('');
   const [characters, setCharacters] = useState([]);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
 
   const artifactPos = [0, 1, 2, 3, 4, 5];
   const [selectedArtifact, setSelectedArtifact] = useState(artifactPos[0]);
 
-  useLayoutEffect(() => {
-    AsyncStorage.getItem('@hoyolab')
-      .then(data => setHoyolabData(JSON.parse(data)))
-      .catch(err => console.error(err));
-  }, []);
-
   useEffect(() => {
-    setTimeout(() => {
+    const loginHoyolab = async () => {
+      const hoyolab = await AsyncStorage.getItem('@hoyolab');
+      // console.log(hoyolab);
+      if (hoyolab) {
+        setHoyolabData(JSON.parse(hoyolab));
+      }
       setLoading(false);
-    }, 1000);
+    };
+
+    loginHoyolab();
   }, []);
 
   useEffect(() => {
     const applyHoyolabData = async () => {
-      if (hoyolabData === null) {
-        setOpenModal(true);
-      } else {
-        await AsyncStorage.removeItem('@hoyolab');
-        await AsyncStorage.setItem('@hoyolab', JSON.stringify(hoyolabData));
-        setOpenModal(false);
-
-        let res = await axios.post('http://locahost:8000/characters', hoyolabData);
+      if (hoyolabData) {
+        const res = await axios.post(`${SERVER_HOST}/characters`, hoyolabData);
         setCharacters(res.data);
-        setSelectedCharacter(res.data[0]);
       }
     };
 
     applyHoyolabData();
   }, [hoyolabData]);
 
-  // useEffect(() => {
-  //   // console.log(characters[0].name);
-  //   setSelectedCharacter(characters[0]);
-  // }, [characters]);
+  useEffect(() => {
+    if (characters.length > 0) {
+      setSelectedCharacter(characters[0]);
+    }
+  }, [characters]);
 
   const submitHoyolabData = async () => {
     try {
-      let data = {
-        uid: parseInt(uid),
-        ltoken,
-        ltuid: parseInt(ltuid),
-      };
-      let res = await axios.post('http://localhost:8000/characters', data);
+      setLoading(true);
+      const body = GetAuthenticationFromHoyolab(cookie, UID);
+      let res = await axios.post(`${SERVER_HOST}/login`, body);
       if (res.data.isAuth) {
-        setHoyolabData(data);
+        setHoyolabData(res.data);
+        await AsyncStorage.setItem('@hoyolab', JSON.stringify(res.data));
+        setLoading(false);
       }
     } catch (error) {
       console.error(error);
@@ -87,6 +89,7 @@ export const Hoyolab = props => {
 
   const logout = async () => {
     await AsyncStorage.removeItem('@hoyolab');
+    setHoyolabData(null);
     setOpenModal(true);
   };
 
@@ -109,7 +112,7 @@ export const Hoyolab = props => {
   if (hoyolabData === null) {
     return (
       <View style={styles.container}>
-        <Modal animationType="fade" transparent={false} visible={openModal}>
+        <Modal animationType="fade" transparent={false} visible={true}>
           <View style={styles.modalContainer}>
             <View style={styles.modalView}>
               <View style={{width: '100%'}}>
@@ -117,34 +120,9 @@ export const Hoyolab = props => {
                   Note: to sync your ingame data, please open the developer console on your browser, choose Application
                   tab, on the left sidebar, click cookies tab, search for ltuid and ltoken
                 </Text>
+
                 <TextInput
-                  onChangeText={text => setLtuid(text)}
-                  placeholder="ltuid"
-                  placeholderTextColor={colors.text}
-                  style={{
-                    width: '100%',
-                    padding: 10,
-                    borderRadius: 10,
-                    backgroundColor: colors.contentBackground2,
-                    marginTop: 15,
-                    color: 'white',
-                  }}
-                />
-                <TextInput
-                  onChangeText={text => setLtoken(text)}
-                  placeholder="ltoken"
-                  placeholderTextColor={colors.text}
-                  style={{
-                    width: '100%',
-                    padding: 10,
-                    borderRadius: 10,
-                    backgroundColor: colors.contentBackground2,
-                    marginTop: 15,
-                    color: 'white',
-                  }}
-                />
-                <TextInput
-                  onChangeText={text => setUid(text)}
+                  onChangeText={text => setUID(text)}
                   placeholder="ingame UID"
                   placeholderTextColor={colors.text}
                   style={{
@@ -155,6 +133,21 @@ export const Hoyolab = props => {
                     marginTop: 15,
                     color: 'white',
                   }}
+                />
+                <TextInput
+                  multiline
+                  numberOfLines={5}
+                  style={{
+                    width: '100%',
+                    padding: 10,
+                    borderRadius: 10,
+                    backgroundColor: colors.contentBackground2,
+                    marginTop: 15,
+                    color: 'white',
+                  }}
+                  placeholder="Hoyolab cookie"
+                  placeholderTextColor={colors.text}
+                  onChangeText={text => setCookie(text)}
                 />
               </View>
               <TouchableOpacity
@@ -189,10 +182,14 @@ export const Hoyolab = props => {
           keyExtractor={item => item.id}
           showsHorizontalScrollIndicator={false}
         />
-        <ScrollView style={{width: '100%', height: '100%'}}>
-          <ImageBackground
+        <ScrollView
+          ref={scrollRef}
+          contentContainerStyle={{width: '100%', paddingBottom: 30}}
+          // onContentSizeChange={() => scrollRef.current.scrollToEnd({animated: true})}
+        >
+          <FastImage
             source={{uri: selectedCharacter?.image}}
-            resizeMode="contain"
+            resizeMode={FastImage.resizeMode.contain}
             style={styles.characterSummary}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
               <View style={styles.artifactWrapper}>
@@ -211,7 +208,7 @@ export const Hoyolab = props => {
                           selectedArtifact === selectedCharacter?.artifacts[0]?.pos ? 'yellow' : colors.textWhite,
                       },
                     ]}>
-                    <Image source={{uri: selectedCharacter?.artifacts[0]?.icon}} style={{width: 40, height: 40}} />
+                    <FastImage source={{uri: selectedCharacter?.artifacts[0]?.icon}} style={{width: 40, height: 40}} />
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => setSelectedArtifact(2)}
@@ -235,7 +232,7 @@ export const Hoyolab = props => {
                           selectedArtifact === selectedCharacter?.artifacts[2].pos ? 'yellow' : colors.textWhite,
                       },
                     ]}>
-                    <Image source={{uri: selectedCharacter?.artifacts[2].icon}} style={{width: 40, height: 40}} />
+                    <FastImage source={{uri: selectedCharacter?.artifacts[2].icon}} style={{width: 40, height: 40}} />
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => setSelectedArtifact(4)}
@@ -246,7 +243,7 @@ export const Hoyolab = props => {
                           selectedArtifact === selectedCharacter?.artifacts[3].pos ? 'yellow' : colors.textWhite,
                       },
                     ]}>
-                    <Image source={{uri: selectedCharacter?.artifacts[3].icon}} style={{width: 40, height: 40}} />
+                    <FastImage source={{uri: selectedCharacter?.artifacts[3].icon}} style={{width: 40, height: 40}} />
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => setSelectedArtifact(5)}
@@ -257,13 +254,13 @@ export const Hoyolab = props => {
                           selectedArtifact === selectedCharacter?.artifacts[4].pos ? 'yellow' : colors.textWhite,
                       },
                     ]}>
-                    <Image source={{uri: selectedCharacter?.artifacts[4].icon}} style={{width: 40, height: 40}} />
+                    <FastImage source={{uri: selectedCharacter?.artifacts[4].icon}} style={{width: 40, height: 40}} />
                   </TouchableOpacity>
                 </View>
               </View>
               <View style={styles.constellationWrapper}>
-                <TouchableOpacity style={[styles.constellations, {marginLeft: -120}]}>
-                  <Image
+                <TouchableOpacity style={[styles.constellations, {marginLeft: -80}]}>
+                  <FastImage
                     source={{uri: selectedCharacter?.constellations[0].icon}}
                     style={{
                       width: 30,
@@ -272,8 +269,8 @@ export const Hoyolab = props => {
                     }}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.constellations, {marginLeft: -50}]}>
-                  <Image
+                <TouchableOpacity style={[styles.constellations, {marginLeft: -15}]}>
+                  <FastImage
                     source={{uri: selectedCharacter?.constellations[1].icon}}
                     style={{
                       width: 30,
@@ -283,7 +280,7 @@ export const Hoyolab = props => {
                   />
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.constellations, {}]}>
-                  <Image
+                  <FastImage
                     source={{uri: selectedCharacter?.constellations[2].icon}}
                     style={{
                       width: 30,
@@ -293,7 +290,7 @@ export const Hoyolab = props => {
                   />
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.constellations, {}]}>
-                  <Image
+                  <FastImage
                     source={{uri: selectedCharacter?.constellations[3].icon}}
                     style={{
                       width: 30,
@@ -302,8 +299,8 @@ export const Hoyolab = props => {
                     }}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.constellations, {marginLeft: -50}]}>
-                  <Image
+                <TouchableOpacity style={[styles.constellations, {marginLeft: -15}]}>
+                  <FastImage
                     source={{uri: selectedCharacter?.constellations[4].icon}}
                     style={{
                       width: 30,
@@ -312,8 +309,8 @@ export const Hoyolab = props => {
                     }}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.constellations, {marginLeft: -120}]}>
-                  <Image
+                <TouchableOpacity style={[styles.constellations, {marginLeft: -80}]}>
+                  <FastImage
                     source={{uri: selectedCharacter?.constellations[5].icon}}
                     style={{
                       width: 30,
@@ -332,12 +329,12 @@ export const Hoyolab = props => {
               <Text style={[styles.heading, {textAlign: 'center'}]}>{selectedCharacter?.name}</Text>
               <Text style={{color: colors.text}}>Friendship level: {selectedCharacter?.friendship}</Text>
             </View>
-          </ImageBackground>
-          <View style={{padding: 20}}>
+          </FastImage>
+          <View style={{padding: 10}}>
             <View style={styles.itemInfoWrapper}>
               <View style={{flexDirection: 'row'}}>
                 <View style={styles.artifact}>
-                  <Image
+                  <FastImage
                     source={{
                       uri:
                         selectedArtifact === 0
@@ -359,7 +356,6 @@ export const Hoyolab = props => {
                         style={{
                           padding: 5,
                           borderRadius: 20,
-
                           color: 'white',
                           fontWeight: '600',
                           fontSize: 17,
@@ -385,7 +381,7 @@ export const Hoyolab = props => {
                   )}
                 </View>
               </View>
-              <ScrollView style={{width: '100%', height: 150}}>
+              <View style={{}}>
                 {selectedArtifact === 0 ? (
                   <Text style={styles.text}>{selectedCharacter?.weapon.description}</Text>
                 ) : (
@@ -398,75 +394,11 @@ export const Hoyolab = props => {
                     </Text>
                   </View>
                 )}
-              </ScrollView>
+              </View>
             </View>
           </View>
         </ScrollView>
       </View>
-
-      {/* modal */}
-      <Modal animationType="fade" transparent={false} visible={openModal}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalView}>
-            <View style={{width: '100%'}}>
-              <Text style={styles.heading}>
-                Note: to sync your ingame data, please open the developer console on your browser, choose Application
-                tab, on the left sidebar, click cookies tab, search for ltuid and ltoken
-              </Text>
-              <TextInput
-                onChangeText={text => setLtuid(text)}
-                placeholder="ltuid"
-                placeholderTextColor={colors.text}
-                style={{
-                  width: '100%',
-                  padding: 10,
-                  borderRadius: 10,
-                  backgroundColor: colors.contentBackground2,
-                  marginTop: 15,
-                  color: 'white',
-                }}
-              />
-              <TextInput
-                onChangeText={text => setLtoken(text)}
-                placeholder="ltoken"
-                placeholderTextColor={colors.text}
-                style={{
-                  width: '100%',
-                  padding: 10,
-                  borderRadius: 10,
-                  backgroundColor: colors.contentBackground2,
-                  marginTop: 15,
-                  color: 'white',
-                }}
-              />
-              <TextInput
-                onChangeText={text => setUid(text)}
-                placeholder="ingame UID"
-                placeholderTextColor={colors.text}
-                style={{
-                  width: '100%',
-                  padding: 10,
-                  borderRadius: 10,
-                  backgroundColor: colors.contentBackground2,
-                  marginTop: 15,
-                  color: 'white',
-                }}
-              />
-            </View>
-            <TouchableOpacity
-              onPress={() => submitHoyolabData()}
-              style={{
-                paddingVertical: 10,
-                borderRadius: 10,
-                backgroundColor: colors.background,
-                marginTop: 15,
-                paddingHorizontal: 20,
-              }}>
-              <Text style={styles.heading}>Done</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
     </View>
   );
 };
@@ -474,7 +406,6 @@ export const Hoyolab = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: colors.background,
   },
@@ -507,12 +438,12 @@ const styles = StyleSheet.create({
   },
   inputWrapper: {
     width: '100%',
+    flex: 1,
   },
   characterSummary: {
     width: '100%',
     alignItems: 'center',
-    height: 350,
-    marginTop: 20,
+    //  marginTop: 20,
   },
   artifactWrapper: {
     flexDirection: 'row',
@@ -541,12 +472,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: colors.text,
+    marginTop: 20,
   },
   itemInfoWrapper: {
-    padding: 20,
+    padding: 10,
     borderWidth: 1,
     borderRadius: 10,
-    width: '100%',
     backgroundColor: colors.contentBackgroundBlured,
     borderColor: colors.text,
   },
@@ -566,5 +497,6 @@ const styles = StyleSheet.create({
     borderColor: colors.text,
     borderWidth: 1,
     marginBottom: 10,
+    marginLeft: 20,
   },
 });

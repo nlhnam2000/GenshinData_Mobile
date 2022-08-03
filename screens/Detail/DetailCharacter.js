@@ -19,6 +19,7 @@ import GenshinDB from 'genshin-db';
 import LinearGradient from 'react-native-linear-gradient';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useSelector} from 'react-redux';
 
 // components
 import {StatTab} from '../../components/Tab/Character/StatTab';
@@ -32,6 +33,7 @@ const Tab = createMaterialTopTabNavigator();
 
 export const DetailCharacter = props => {
   const insets = useSafeAreaInsets();
+  const resultLanguage = useSelector(state => state.LanguageReducer.resultLanguage);
   const [loading, setLoading] = useState(true);
   const character = props.route.params.character;
 
@@ -48,9 +50,15 @@ export const DetailCharacter = props => {
   }
 
   return (
-    <View style={[styles.container, {paddingTop: Platform.OS === 'ios' ? insets.top : 10}]}>
+    <View
+      style={[styles.container, {paddingTop: Platform.OS === 'ios' ? insets.top : 10}]}>
       <View style={styles.headerWrapper}>
-        <Feather name="arrow-left" size={20} color={'white'} onPress={() => props.navigation.goBack()} />
+        <Feather
+          name="arrow-left"
+          size={24}
+          color={'white'}
+          onPress={() => props.navigation.goBack()}
+        />
       </View>
       <View
         style={{
@@ -62,7 +70,11 @@ export const DetailCharacter = props => {
         <View style={styles.contentWrapper}>
           <View style={styles.contentHeader}>
             <LinearGradient
-              colors={GenshinDB.characters(character).rarity === '5' ? colors.goldCard : colors.purpleCard}
+              colors={
+                GenshinDB.characters(character).rarity === '5'
+                  ? colors.goldCard
+                  : colors.purpleCard
+              }
               style={[styles.characterItem]}>
               <Image
                 source={{
@@ -86,12 +98,14 @@ export const DetailCharacter = props => {
                     fontSize: 19,
                     marginRight: 5,
                   }}>
-                  {GenshinDB.characters(character).name} ({GenshinDB.characters(character).rarity}{' '}
-                  <Feather name="star" size={20} color={colors.textWhite} />)
+                  {GenshinDB.characters(character).name} (
+                  {GenshinDB.characters(character).rarity}{' '}
+                  <Feather name="star" size={24} color={colors.textWhite} />)
                 </Text>
                 <Image
                   source={{
-                    uri: GenshinDB.elements(GenshinDB.characters(character).element).images.wikia,
+                    uri: GenshinDB.elements(GenshinDB.characters(character).element)
+                      .images.wikia,
                   }}
                   style={{width: 20, height: 20}}
                 />
@@ -101,7 +115,10 @@ export const DetailCharacter = props => {
                   color: colors.textWhite,
                   fontWeight: 'bold',
                 }}>
-                {GenshinDB.characters(character).description}
+                {
+                  GenshinDB.characters(character, {resultLanguage: resultLanguage})
+                    .description
+                }
               </Text>
             </View>
           </View>
@@ -109,7 +126,14 @@ export const DetailCharacter = props => {
         {/* Tab */}
       </View>
       <View
-        style={[styles.container, {marginTop: 20, borderBottomColor: colors.contentBackground, borderBottomWidth: 1}]}>
+        style={[
+          styles.container,
+          {
+            marginTop: 20,
+            borderBottomColor: colors.contentBackground,
+            borderBottomWidth: 1,
+          },
+        ]}>
         <Tab.Navigator
           initialRouteName="example"
           screenOptions={{
@@ -119,9 +143,18 @@ export const DetailCharacter = props => {
             tabBarStyle: {backgroundColor: colors.contentBackground},
             tabBarActiveTintColor: 'black',
           }}>
-          <Tab.Screen name="Stat" children={() => <StatTab character={character} {...props} />} />
-          <Tab.Screen name="Talent" children={() => <TalentTab character={character} {...props} />} />
-          <Tab.Screen name="Constellation" children={() => <ConstellationTab character={character} {...props} />} />
+          <Tab.Screen
+            name="Stat"
+            children={() => <StatTab character={character} {...props} />}
+          />
+          <Tab.Screen
+            name="Talent"
+            children={() => <TalentTab character={character} {...props} />}
+          />
+          <Tab.Screen
+            name="Constellation"
+            children={() => <ConstellationTab character={character} {...props} />}
+          />
         </Tab.Navigator>
       </View>
     </View>

@@ -8,28 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* GenshinDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* GenshinDataTests.m */; };
-		06789EFEA5684950AB8F5F66 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C412FC726DF94B2AB8979455 /* Foundation.ttf */; };
-		0C8FA5F0BB1047BBA953356D /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC069949541940C2B26F0CC7 /* Octicons.ttf */; };
-		1369D41B7E95471DB3E38CD7 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B0CC82201B354D4C82812507 /* FontAwesome5_Regular.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		265A69B7D7E4447F972A5868 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3CC4E9D8F4D4AE787C5B42A /* SimpleLineIcons.ttf */; };
-		2E1720F0596640A289B95C8E /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88F407A802AF42AD94F5EE19 /* FontAwesome5_Brands.ttf */; };
 		3A0BD6A2BFB6E6AEF82E3EAE /* libPods-GenshinData-GenshinDataTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B47833136F2F3F62592EADF7 /* libPods-GenshinData-GenshinDataTests.a */; };
 		3F2312A7840887669020D542 /* libPods-GenshinData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 354F077B526F3A7D3DB34EC1 /* libPods-GenshinData.a */; };
-		4EE17CDD144743CF9A0B35C2 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D893623D55AC406CB86B7509 /* Feather.ttf */; };
-		57CC209B3DB840768DF69984 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7A08247645447A5B099A0F9 /* Zocial.ttf */; };
-		721826E37D1049E492C7B391 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 59B6AC62A40A4847AC3A0CB7 /* AntDesign.ttf */; };
-		7979228799B14C888F920957 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7F5A9E9188646148985FA70 /* FontAwesome5_Solid.ttf */; };
-		799713D226AB4EB4BB866E17 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D823B2E9EA904412ABCCC434 /* Fontisto.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		8E6035A262C84B699771B602 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0927622207D431FB03D1E92 /* Entypo.ttf */; };
-		91AB99667CC7496BA8942270 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7E0F9440B9149A0A0AAED6B /* MaterialIcons.ttf */; };
-		C803F1A8FDB24CCC864BDDAE /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD263501E3BA473D9A3ACDEB /* EvilIcons.ttf */; };
-		D5198342D5AE4E6BBDFA45AA /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86180CAE54A345959C829D5F /* FontAwesome.ttf */; };
-		E7AFD2B070B34C928B35EC7C /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 81C02EB7063B4006806EFD38 /* MaterialCommunityIcons.ttf */; };
-		FFF1B260D98B45E5A75003DA /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25239E62CBCE4922848E5781 /* Ionicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -298,22 +282,6 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				721826E37D1049E492C7B391 /* AntDesign.ttf in Resources */,
-				8E6035A262C84B699771B602 /* Entypo.ttf in Resources */,
-				C803F1A8FDB24CCC864BDDAE /* EvilIcons.ttf in Resources */,
-				4EE17CDD144743CF9A0B35C2 /* Feather.ttf in Resources */,
-				D5198342D5AE4E6BBDFA45AA /* FontAwesome.ttf in Resources */,
-				2E1720F0596640A289B95C8E /* FontAwesome5_Brands.ttf in Resources */,
-				1369D41B7E95471DB3E38CD7 /* FontAwesome5_Regular.ttf in Resources */,
-				7979228799B14C888F920957 /* FontAwesome5_Solid.ttf in Resources */,
-				799713D226AB4EB4BB866E17 /* Fontisto.ttf in Resources */,
-				06789EFEA5684950AB8F5F66 /* Foundation.ttf in Resources */,
-				FFF1B260D98B45E5A75003DA /* Ionicons.ttf in Resources */,
-				E7AFD2B070B34C928B35EC7C /* MaterialCommunityIcons.ttf in Resources */,
-				91AB99667CC7496BA8942270 /* MaterialIcons.ttf in Resources */,
-				0C8FA5F0BB1047BBA953356D /* Octicons.ttf in Resources */,
-				265A69B7D7E4447F972A5868 /* SimpleLineIcons.ttf in Resources */,
-				57CC209B3DB840768DF69984 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +356,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GenshinData/Pods-GenshinData-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -466,6 +435,7 @@
 			baseConfigurationReference = E0A13AAE7E17B14C01359273 /* Pods-GenshinData-GenshinDataTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = W8Q3S4F933;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -494,6 +464,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = W8Q3S4F933;
 				INFOPLIST_FILE = GenshinDataTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -519,6 +490,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W8Q3S4F933;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = GenshinData/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -545,11 +517,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W8Q3S4F933;
 				INFOPLIST_FILE = GenshinData/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -680,6 +654,7 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

@@ -15,10 +15,12 @@ import {colors} from '../../../assets/colors/colors';
 import Feather from 'react-native-vector-icons/Feather';
 import {constellations} from 'genshin-db';
 import Markdown from 'react-native-markdown-package';
+import {useSelector} from 'react-redux';
 
 const {width, height} = Dimensions.get('window');
 
 export const ConstellationTab = props => {
+  const options = useSelector(state => state.LanguageReducer);
   const [loading, setLoading] = useState(true);
   const c = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
 
@@ -42,10 +44,16 @@ export const ConstellationTab = props => {
               return (
                 <View key={index} style={styles.constellationWrapper}>
                   <View style={styles.constellationName}>
-                    <Text style={[styles.text, {textAlign: 'center', color: 'white', marginBottom: 10}]}>
-                      {constellations(props.character)[c[index]].name}
+                    <Text
+                      style={[
+                        styles.text,
+                        {textAlign: 'center', color: 'white', marginBottom: 10},
+                      ]}>
+                      {constellations(props.character, options)[c[index]].name}
                     </Text>
-                    <Text style={[styles.text, {opacity: 0.4}]}>Constellation lv.{index + 1}</Text>
+                    <Text style={[styles.text, {opacity: 0.4}]}>
+                      Constellation lv.{index + 1}
+                    </Text>
                   </View>
                   <View
                     style={{
@@ -53,7 +61,7 @@ export const ConstellationTab = props => {
                       marginTop: 10,
                     }}>
                     <Markdown styles={markdownStyle.singleLineMd}>
-                      {constellations(props.character)[c[index]].effect}
+                      {constellations(props.character, options)[c[index]].effect}
                     </Markdown>
                   </View>
                 </View>

@@ -24,6 +24,7 @@ import {DetailWeapon} from './screens/Detail/DetailWeapon';
 import {HomeScreen} from './screens/HomeScreen';
 import {Todos} from './screens/Todos';
 import {Hoyolab} from './screens/Hoyolab';
+import {Database} from './screens/Database';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 Feather.loadFont();
@@ -35,18 +36,18 @@ export const App = () => {
   StatusBar.setBarStyle('light-content', true);
 
   useEffect(() => {
-    setTimeout(async () => {
-      await AsyncStorage.removeItem('@hoyolab');
-      await AsyncStorage.setItem(
-        '@hoyolab',
-        JSON.stringify({
-          ltuid: 65341511,
-          ltoken: 'cijhdhiowQyHmi1rBGKAi9N389tEzx7YcjrzC15r',
-          uid: 810304219,
-        }),
-      );
-      setLoading(false);
-    }, 1000);
+    // setTimeout(async () => {
+    //   await AsyncStorage.removeItem('@hoyolab');
+    //   // await AsyncStorage.setItem(
+    //   //   '@hoyolab',
+    //   //   JSON.stringify({
+    //   //     ltuid: 65341511,
+    //   //     ltoken: 'cijhdhiowQyHmi1rBGKAi9N389tEzx7YcjrzC15r',
+    //   //     uid: 810304219,
+    //   //   }),
+    //   // );
+    //   setLoading(false);
+    // }, 1000);
 
     setLoading(false);
   }, []);
@@ -71,6 +72,7 @@ export const App = () => {
           <Drawer.Screen component={DetailWeapon} name="DetailWeapon" options={{headerShown: false}} />
           <Drawer.Screen component={Todos} name="Todos" options={{headerShown: false}} />
           <Drawer.Screen component={Hoyolab} name="Hoyolab" options={{headerShown: false}} />
+          <Drawer.Screen component={Database} name="Database" options={{headerShown: false}} />
         </Drawer.Navigator>
       </NavigationContainer>
     );

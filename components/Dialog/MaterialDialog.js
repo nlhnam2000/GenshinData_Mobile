@@ -24,12 +24,16 @@ export const MaterialDialog = props => {
           {GenshinDB.materials(props.message).rarity === '5' ? (
             <>
               <LinearGradient colors={colors.goldCard} style={styles.materialNameWrapper}>
-                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>{props.message}</Text>
+                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                  {props.message}
+                </Text>
                 <TouchableOpacity onPress={() => props.onCancel()}>
-                  <Feather name="x" size={20} color="white" />
+                  <Feather name="x" size={24} color="white" />
                 </TouchableOpacity>
               </LinearGradient>
-              <LinearGradient style={styles.materialImageWrapper} colors={colors.goldCard}>
+              <LinearGradient
+                style={styles.materialImageWrapper}
+                colors={colors.goldCard}>
                 <View style={styles.materialType}>
                   <Text style={{color: 'white', fontWeight: '600'}}>
                     {GenshinDB.materials(props.message).materialtype}
@@ -45,13 +49,19 @@ export const MaterialDialog = props => {
           ) : null}
           {GenshinDB.materials(props.message).rarity === '4' ? (
             <>
-              <LinearGradient colors={colors.purpleCard} style={styles.materialNameWrapper}>
-                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>{props.message}</Text>
+              <LinearGradient
+                colors={colors.purpleCard}
+                style={styles.materialNameWrapper}>
+                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                  {props.message}
+                </Text>
                 <TouchableOpacity onPress={() => props.onCancel()}>
-                  <Feather name="x" size={20} color="white" />
+                  <Feather name="x" size={24} color="white" />
                 </TouchableOpacity>
               </LinearGradient>
-              <LinearGradient style={styles.materialImageWrapper} colors={colors.purpleCard}>
+              <LinearGradient
+                style={styles.materialImageWrapper}
+                colors={colors.purpleCard}>
                 <View style={styles.materialType}>
                   <Text style={{color: 'white', fontWeight: '600'}}>
                     {GenshinDB.materials(props.message).materialtype}
@@ -68,12 +78,16 @@ export const MaterialDialog = props => {
           {GenshinDB.materials(props.message).rarity === '3' ? (
             <>
               <LinearGradient colors={colors.blueCard} style={styles.materialNameWrapper}>
-                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>{props.message}</Text>
+                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                  {props.message}
+                </Text>
                 <TouchableOpacity onPress={() => props.onCancel()}>
-                  <Feather name="x" size={20} color="white" />
+                  <Feather name="x" size={24} color="white" />
                 </TouchableOpacity>
               </LinearGradient>
-              <LinearGradient style={styles.materialImageWrapper} colors={colors.blueCard}>
+              <LinearGradient
+                style={styles.materialImageWrapper}
+                colors={colors.blueCard}>
                 <View style={styles.materialType}>
                   <Text style={{color: 'white', fontWeight: '600'}}>
                     {GenshinDB.materials(props.message).materialtype}
@@ -89,13 +103,19 @@ export const MaterialDialog = props => {
           ) : null}
           {GenshinDB.materials(props.message).rarity === '2' ? (
             <>
-              <LinearGradient colors={colors.greenCard} style={styles.materialNameWrapper}>
-                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>{props.message}</Text>
+              <LinearGradient
+                colors={colors.greenCard}
+                style={styles.materialNameWrapper}>
+                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                  {props.message}
+                </Text>
                 <TouchableOpacity onPress={() => props.onCancel()}>
-                  <Feather name="x" size={20} color="white" />
+                  <Feather name="x" size={24} color="white" />
                 </TouchableOpacity>
               </LinearGradient>
-              <LinearGradient style={styles.materialImageWrapper} colors={colors.greenCard}>
+              <LinearGradient
+                style={styles.materialImageWrapper}
+                colors={colors.greenCard}>
                 <View style={styles.materialType}>
                   <Text style={{color: 'white', fontWeight: '600'}}>
                     {GenshinDB.materials(props.message).materialtype}
@@ -112,12 +132,16 @@ export const MaterialDialog = props => {
           {GenshinDB.materials(props.message).rarity === '1' ? (
             <>
               <LinearGradient colors={colors.grayCard} style={styles.materialNameWrapper}>
-                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>{props.message}</Text>
+                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                  {props.message}
+                </Text>
                 <TouchableOpacity onPress={() => props.onCancel()}>
-                  <Feather name="x" size={20} color="white" />
+                  <Feather name="x" size={24} color="white" />
                 </TouchableOpacity>
               </LinearGradient>
-              <LinearGradient style={styles.materialImageWrapper} colors={colors.grayCard}>
+              <LinearGradient
+                style={styles.materialImageWrapper}
+                colors={colors.grayCard}>
                 <View style={styles.materialType}>
                   <Text style={{color: 'white', fontWeight: '600'}}>
                     {GenshinDB.materials(props.message).materialtype}
@@ -134,12 +158,16 @@ export const MaterialDialog = props => {
           {GenshinDB.materials(props.message).rarity === undefined ? (
             <>
               <LinearGradient colors={colors.grayCard} style={styles.materialNameWrapper}>
-                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>{props.message}</Text>
+                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                  {props.message}
+                </Text>
                 <TouchableOpacity onPress={() => props.onCancel()}>
-                  <Feather name="x" size={20} color="white" />
+                  <Feather name="x" size={24} color="white" />
                 </TouchableOpacity>
               </LinearGradient>
-              <LinearGradient style={styles.materialImageWrapper} colors={colors.grayCard}>
+              <LinearGradient
+                style={styles.materialImageWrapper}
+                colors={colors.grayCard}>
                 <View style={styles.materialType}>
                   <Text style={{color: 'white', fontWeight: '600'}}>
                     {GenshinDB.materials(props.message).materialtype}
@@ -154,14 +182,22 @@ export const MaterialDialog = props => {
             </>
           ) : null}
           <ScrollView>
-            <View style={{width: '100%', padding: 15, maxHeight: 250, backgroundColor: 'white'}}>
+            <View
+              style={{
+                width: '100%',
+                padding: 15,
+                maxHeight: 250,
+                backgroundColor: 'white',
+              }}>
               <Text>{GenshinDB.materials(props.message).description}</Text>
             </View>
           </ScrollView>
 
           <View style={styles.materialSourceWrapper}>
             <Feather name="map-pin" size={17} color={colors.background} />
-            <Text style={{marginLeft: 5, color: colors.background, fontWeight: 'bold'}}>Source</Text>
+            <Text style={{marginLeft: 5, color: colors.background, fontWeight: 'bold'}}>
+              Source
+            </Text>
           </View>
           <View style={styles.sourceWrapper}>
             {GenshinDB.materials(props.message).daysofweek?.length > 0 ? (
@@ -182,13 +218,17 @@ export const MaterialDialog = props => {
                     {GenshinDB.materials(props.message).daysofweek.map((day, index) => {
                       if (day !== 'Sunday') {
                         return (
-                          <Text key={index} style={{color: colors.yellow, fontWeight: 'bold'}}>
+                          <Text
+                            key={index}
+                            style={{color: colors.yellow, fontWeight: 'bold'}}>
                             {day}/
                           </Text>
                         );
                       } else {
                         return (
-                          <Text key={index} style={{color: colors.yellow, fontWeight: 'bold'}}>
+                          <Text
+                            key={index}
+                            style={{color: colors.yellow, fontWeight: 'bold'}}>
                             {day}
                           </Text>
                         );
@@ -196,7 +236,7 @@ export const MaterialDialog = props => {
                     })}
                   </View>
                 </View>
-                <Feather name="chevron-right" size={20} color="white" />
+                <Feather name="chevron-right" size={24} color="white" />
               </TouchableOpacity>
             ) : (
               <View>
@@ -215,9 +255,12 @@ export const MaterialDialog = props => {
                         borderColor: colors.contentBackground,
                       }}>
                       <View>
-                        <Text style={{color: colors.contentBackground, fontWeight: 'bold'}}>{item}</Text>
+                        <Text
+                          style={{color: colors.contentBackground, fontWeight: 'bold'}}>
+                          {item}
+                        </Text>
                       </View>
-                      <Feather name="chevron-right" size={20} color="white" />
+                      <Feather name="chevron-right" size={24} color="white" />
                     </View>
                   );
                 })}
@@ -240,7 +283,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: colors.background,
+    backgroundColor: 'rgba(0,0,0,0.6)',
     // opacity: 0.2,
   },
   modalView: {
